@@ -5,6 +5,8 @@
 #include <string.h>
 %}
 
+abreColchetes		(\[)
+fechaColchetes		(\])
 abreChaves			(\{)
 fechaChaves			(\})
 abreParenteses		(\()
@@ -24,16 +26,14 @@ diferente			("!=")
 contraBarra			(\\)
 aspas				(\")
 pontoVirgula		(;)
-espaco				" "
+espaco				" "|\t|\n
 digito				[0-9]
 string				{aspas}({nome})*{aspas}
 numeral				{digito}+
-letra				[A-z]
+letra				[A-Z]|[a-z]
 frac_opt			"."{numeral}+
 num					{numeral}({frac_opt})?
 nome				({letra}+{digito}*)+
-abreColchetes		
-fechaColchetes		
 
 %%
 	/** RULES sec (mand.) */
