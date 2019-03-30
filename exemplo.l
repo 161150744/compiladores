@@ -1,72 +1,85 @@
 	/** DEFINITION sec*/
 %{
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#undef yywrap
+#define yywrap() 1
+#include<stdio.h>
+	int i0=0;
+	int i1=0;
+	int i2=0;
+	int i3=0;
+	int i4=0;
+	int i5=0;
+	int i6=0;
+	int i7=0;
+	int i8=0;
+	int i9=0;
 %}
 
-abreColchetes		(\[)
-fechaColchetes		(\])
-abreChaves			(\{)
-fechaChaves			(\})
-abreParenteses		(\()
-fechaParenteses		(\))
-adicao				("+")
-subtracao			("-")
-divisao				("/")
-multiplicacao		("*")
-atribuicao			("=")
-igualdade			("==")
-negacao				("!")
-maior				(">")
-menor				("<")
-maiorIgual			(">=")
-menorIgual			("<=")
-diferente			("!=")
-contraBarra			(\\)
-aspas				(\")
-pontoVirgula		(;)
-espaco				" "|\t|\n
+aspas				\"
+atribuicao			"="
+operacoes			"+"|"-"|"*"|"/"|"%"
+caracteres			"("|")"|"{"|"}"|"["|"]"|";"|":"|","|"#"|"."
+relop				">"|"<"|">="|"<="|"=="|"!="|"&&"|"||"
+espaco				("\n"|""|"\t")+
 digito				[0-9]
-string				{aspas}({nome})*{aspas}
+string				{aspas}[" "-"~"]*{aspas}
 numeral				{digito}+
 letra				[A-Z]|[a-z]
 frac_opt			"."{numeral}+
-num					{numeral}({frac_opt})?
+num					{numeral}({frac_opt})?("E"("+"|"-")?{numeral}+)?
+reservados			if|else|while|for|do|switch|int|float|char|double|bool|NULL
 nome				({letra}+{digito}*)+
+
+%option noyywrap
 
 %%
 	/** RULES sec (mand.) */
-{num}				printf("Find number: %s\n", yytext);
-{nome}				printf("Find nome: %s\n", yytext);
-{espaco}			printf("");
-{string}			printf("Find string: %s\n", yytext);
-{pontoVirgula}		printf("Find ponto e virgula: %s\n", yytext);
-{adicao}			printf("Find adicao: %s\n", yytext);
-{subtracao}			printf("Find subtracao: %s\n", yytext);
-{divisao}			printf("Find divisao: %s\n", yytext);
-{multiplicacao}		printf("Find multiplicacao: %s\n", yytext);
-{atribuicao}		printf("Find atribuicao: %s\n", yytext);
-{igualdade}			printf("Find igualdade: %s\n", yytext);
-{negacao}			printf("Find negacao: %s\n", yytext);
-{maior}				printf("Find maior: %s\n", yytext);
-{menor}				printf("Find menor: %s\n", yytext);
-{maiorIgual}		printf("Find maiorIgual: %s\n", yytext);
-{menorIgual}		printf("Find menorIgual: %s\n", yytext);
-{diferente}			printf("Find diferente: %s\n", yytext);
-{abreParenteses}	printf("Find abre parenteses: %s\n", yytext);
-{fechaParenteses}	printf("Find fecha parenteses: %s\n", yytext);
-{abreChaves}		printf("Find abre chaves: %s\n", yytext);
-{fechaChaves}		printf("Find fecha chaves: %s\n", yytext);
-{abreColchetes}		printf("Find abre colchetes: %s\n", yytext);
-{fechaColchetes}	printf("Find fecha colchetes: %s\n", yytext);
-.					printf("NaN\n");
+{num}	{
+			printf("encontrou um numero: %s\n", yytext);
+			i0++;
+		}
+{nome}	{
+	printf("encontrou um nome: %s\n", yytext);
+	i1++;
+}
+{espaco}	{
+	printf("");
+	i2++;
+}
+{string}	{
+	printf("encontrou uma string: %s\n", yytext);
+	i3++;
+}
+{reservados}	{
+	printf("encontrou uma palavra reservada: %s\n", yytext);
+	i4++;
+}
+{relop}	{
+	printf("encontrou uma operacao relacional: %s\n", yytext);
+	i5++;
+}
+{caracteres}	{
+	printf("encontrou um caracter especial: %s\n", yytext);
+	i6++;
+}
+{operacoes}	{
+	printf("encontrou uma operacao: %s", yytext);
+	i7++;
+}
+{atribuicao}	{
+	printf("encontrou uma atribuicao: %s", yytext);
+	i8++;
+}
+.	{
+	printf("NaN\n");
+	i9++;
+}
 
 
 
 %%
 	/** SUBROUTINE sec */
-	main() {
+	void main() {
 		printf("Digite o Lexema: ");
 		yylex();
 	}
