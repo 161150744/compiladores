@@ -28,7 +28,7 @@ numeral				{digito}+
 letra				[A-Z]|[a-z]
 frac_opt			"."{numeral}+
 num					{numeral}({frac_opt})?("E"("+"|"-")?{numeral}+)?
-reservados			_if_|_else_|_while_|_for_|_do_|_switch_|_int_|_float_|_char_|_double_|_bool_|_NULL_|_break_|_return_|_case_|_true_|_false_|_void_
+reservados			_break_|_case_|_char_|_default_|_do_|_double_|_else_|_float_|_for_|_goto_|_if_|_int_|_long_|_return_|_sizeof_|_static_|_struct_|_typedef_|_void_|_while_
 nome				({letra}+{digito}*)+(_*({letra}+{digito}*)+)*
 string				{aspas}({logicos}|{atribuicao}|{operacoes}|{caracteres}|{relop}|{espaco}|{num}|{reservados}|{nome})*{aspas}
 
