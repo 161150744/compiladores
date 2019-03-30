@@ -13,31 +13,33 @@
 	int i7=0;
 	int i8=0;
 	int i9=0;
+	int i10=0;
 %}
 
+logicos				"!"|"&&"|"||"
 aspas				\"
 atribuicao			"="
 operacoes			"+"|"-"|"*"|"/"|"%"
 caracteres			"("|")"|"{"|"}"|"["|"]"|";"|":"|","|"#"|"."
-relop				">"|"<"|">="|"<="|"=="|"!="|"&&"|"||"
-espaco				("\n"|""|"\t")+
+relop				">"|"<"|">="|"<="|"=="|"!="
+espaco				(\n|" "|\t)+
 digito				[0-9]
-string				{aspas}[" "-"~"]*{aspas}
 numeral				{digito}+
 letra				[A-Z]|[a-z]
 frac_opt			"."{numeral}+
 num					{numeral}({frac_opt})?("E"("+"|"-")?{numeral}+)?
-reservados			if|else|while|for|do|switch|int|float|char|double|bool|NULL
-nome				({letra}+{digito}*)+
+reservados			_if_|_else_|_while_|_for_|_do_|_switch_|_int_|_float_|_char_|_double_|_bool_|_NULL_|_break_|_return_|_case_|_true_|_false_|_void_
+nome				({letra}+{digito}*)+(_*({letra}+{digito}*)+)*
+string				{aspas}({logicos}|{atribuicao}|{operacoes}|{caracteres}|{relop}|{espaco}|{num}|{reservados}|{nome})*{aspas}
 
 %option noyywrap
 
 %%
 	/** RULES sec (mand.) */
 {num}	{
-			printf("encontrou um numero: %s\n", yytext);
-			i0++;
-		}
+	printf("encontrou um numero: %s\n", yytext);
+	i0++;
+}
 {nome}	{
 	printf("encontrou um nome: %s\n", yytext);
 	i1++;
@@ -63,23 +65,48 @@ nome				({letra}+{digito}*)+
 	i6++;
 }
 {operacoes}	{
-	printf("encontrou uma operacao: %s", yytext);
+	printf("encontrou uma operacao: %s\n", yytext);
 	i7++;
 }
 {atribuicao}	{
-	printf("encontrou uma atribuicao: %s", yytext);
+	printf("encontrou uma atribuicao: %s\n", yytext);
 	i8++;
 }
-.	{
-	printf("NaN\n");
+{logicos}	{
+	printf("encontrou um operador logico: %s\n", yytext);
 	i9++;
+}
+.	{
+	printf("caracter nao identificado\n");
+	i10++;
 }
 
 
 
 %%
 	/** SUBROUTINE sec */
-	void main() {
-		printf("Digite o Lexema: ");
-		yylex();
+	int main(int argc, char *argv[]) {
+		if(argc>1){
+			yyin = fopen(argv[1], "r"); 
+			printf("Digite o Lexema:\n");
+			yylex();
+			fclose(yyin);
+			printf("_________________________________\n");
+			printf("\tencontrou %d numeros\n", i0);
+			printf("\tencontrou %d nomes\n", i1);
+			printf("\tencontrou %d espacos, tabs, quebras de linha...\n", i2);
+			printf("\tencontrou %d strings\n", i3);
+			printf("\tencontrou %d palavras reservadas\n", i4);
+			printf("\tencontrou %d operacoes relacionais\n", i5);
+			printf("\tencontrou %d caracteres especiais\n", i6);
+			printf("\tencontrou %d operacoes\n", i7);
+			printf("\tencontrou %d atribuicoes\n", i8);
+			printf("\tencontrou %d operadores logicos\n", i9);
+			printf("\tencontrou %d caracteres nao identificados\n", i10);
+			printf("_________________________________\n");
+		}
+		else{
+			printf("passe um nome de arquivo: ./a.out exemplo.l\n");
+		}
+		return 0;
 	}
