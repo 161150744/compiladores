@@ -33,5 +33,5 @@
   
 # <a name="Desenvolvedores"></a>Desenvolvedores<br>
 
-* Guilherme Neri Bustamante Sá - <guinbsa@gmail.com> - [Perfil GitHub](https://github.com/161150744) <br>
+* **\<O pica da galaxias\> Guilherme Neri Bustamante Sá - <guinbsa@gmail.com> - [Perfil GitHub](https://github.com/161150744) <br>**
 * Lucas Antunes de Almeida - <lucasalmeida053@gmail.com> - [Perfil GitHub](https://github.com/LucasAntunesdeAlmeida) <br>
