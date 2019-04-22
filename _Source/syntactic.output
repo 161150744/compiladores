@@ -1,9 +1,14 @@
 Terminais sem uso na gramática
 
-   AND
    OR
-   NEGACAO
+   AND
+   NOT
+   '+'
+   '-'
+   '*'
+   '/'
    IDF
+   NEGACAO
    ASPAS
    ABRE_COLCHETE
    FECHA_COLCHETE
@@ -122,118 +127,123 @@ Gramática
 Terminais, com as regras onde eles aparecem
 
 $end (0) 0
+'*' (42)
+'+' (43)
+'-' (45)
+'/' (47)
 error (256)
-SUBTRACAO (258) 46
-SOMA (259) 45
-MULTIPLICACAO (260) 47
-DIVISAO (261) 48
-RESTO (262) 49
-AND (263)
-OR (264)
-NEGACAO (265)
-IDF (266)
-ASPAS (267)
-ATRIBUICAO (268) 29
-ABRE_PARENTESES (269) 37
-FECHA_PARENTESES (270) 38
-ABRE_CHAVE (271) 35
-FECHA_CHAVE (272) 36
-ABRE_COLCHETE (273)
-FECHA_COLCHETE (274)
-PONTO_E_VIRGULA (275) 31
-DOIS_PONTOS (276)
-VIRGULA (277) 32
-HASHMARK (278)
-PONTO (279)
-PIPE (280)
-BARRA (281)
-MAIOR (282) 41
-MENOR (283) 42
-MAIOR_IGUAL (284) 43
-MENOR_IGUAL (285) 44
-IGUAL (286) 40
-DIFERENTE (287)
-ESPACO (288)
-BARRAN (289)
-BARRAT (290)
-DIGITO (291)
-NUMERAL (292)
-LETRA (293)
-FRAC_OPT (294)
-NUM (295) 51
-RES_BREAK (296)
-RES_CASE (297)
-RES_CHAR (298)
-RES_DEFAULT (299)
-RES_DO (300)
-RES_DOUBLE (301) 55
-RES_ELSE (302) 34
-RES_FLOAT (303) 52
-RES_FOR (304) 22
-RES_GOTO (305)
-RES_IF (306) 33
-RES_INT (307) 53
-RES_LONG (308)
-RES_RETURN (309)
-RES_SIZEOF (310)
-RES_STATIC (311)
-RES_STRUCT (312)
-RES_TYPEDEF (313)
-RES_VOID (314)
-RES_WHILE (315)
-NOME (316) 30
-STRING (317) 54
-ALGUMA_COISA (318)
-RES_BOOL (319) 56
+OR (258)
+AND (259)
+NOT (260)
+IDF (261)
+NEGACAO (262)
+ASPAS (263)
+ATRIBUICAO (264) 29
+SOMA (265) 45
+SUBTRACAO (266) 46
+MULTIPLICACAO (267) 47
+DIVISAO (268) 48
+RESTO (269) 49
+ABRE_PARENTESES (270) 37
+FECHA_PARENTESES (271) 38
+ABRE_CHAVE (272) 35
+FECHA_CHAVE (273) 36
+ABRE_COLCHETE (274)
+FECHA_COLCHETE (275)
+PONTO_E_VIRGULA (276) 31
+DOIS_PONTOS (277)
+VIRGULA (278) 32
+HASHMARK (279)
+PONTO (280)
+PIPE (281)
+BARRA (282)
+MAIOR (283) 41
+MENOR (284) 42
+MAIOR_IGUAL (285) 43
+MENOR_IGUAL (286) 44
+IGUAL (287) 40
+DIFERENTE (288)
+ESPACO (289)
+BARRAN (290)
+BARRAT (291)
+DIGITO (292)
+NUMERAL (293)
+LETRA (294)
+FRAC_OPT (295)
+NUM (296) 51
+RES_BREAK (297)
+RES_CASE (298)
+RES_CHAR (299)
+RES_DEFAULT (300)
+RES_DO (301)
+RES_DOUBLE (302) 55
+RES_ELSE (303) 34
+RES_FLOAT (304) 52
+RES_FOR (305) 22
+RES_GOTO (306)
+RES_IF (307) 33
+RES_INT (308) 53
+RES_LONG (309)
+RES_RETURN (310)
+RES_SIZEOF (311)
+RES_STATIC (312)
+RES_STRUCT (313)
+RES_TYPEDEF (314)
+RES_VOID (315)
+RES_WHILE (316)
+NOME (317) 30
+STRING (318) 54
+ALGUMA_COISA (319)
+RES_BOOL (320) 56
 
 
 Não terminais com as regras onde eles aparecem
 
-$accept (65)
+$accept (70)
     à esquerda: 0
-root (66)
+root (71)
     à esquerda: 1, à direita: 0
-code (67)
+code (72)
     à esquerda: 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21,
     à direita: 1 3 5 6 7 8 9 11 14 15 18 19 20 21
-for (68)
+for (73)
     à esquerda: 22, à direita: 20 21
-parameters (69)
+parameters (74)
     à esquerda: 23 24, à direita: 16 17 18 19 24
-recursionOP (70)
+recursionOP (75)
     à esquerda: 25 26, à direita: 4 5 10 11 26
-recursionDec (71)
+recursionDec (76)
     à esquerda: 27 28, à direita: 2 3 28
-assignment (72)
+assignment (77)
     à esquerda: 29, à direita: 4 5 10 11 20 21
-var (73)
+var (78)
     à esquerda: 30, à direita: 10 11 12 13 14 15 16 17 18 19 20 21
     39 50
-semi (74)
+semi (79)
     à esquerda: 31, à direita: 13 14 17 18 20 21 25 27
-comma (75)
+comma (80)
     à esquerda: 32, à direita: 24 28
-if (76)
+if (81)
     à esquerda: 33, à direita: 6 7 8 9
-else (77)
+else (82)
     à esquerda: 34, à direita: 8 9
-openKey (78)
+openKey (83)
     à esquerda: 35, à direita: 6 7 8 9 15 19 20 21
-closeKey (79)
+closeKey (84)
     à esquerda: 36, à direita: 6 7 8 9 15 19 20 21
-openParent (80)
+openParent (85)
     à esquerda: 37, à direita: 6 7 8 12 13 14 15 16 17 18 19 20 21
-closeParent (81)
+closeParent (86)
     à esquerda: 38, à direita: 6 7 8 12 13 14 15 16 17 18 19 20 21
-declaration (82)
+declaration (87)
     à esquerda: 39, à direita: 2 3 4 5 28
-boolean_exp (83)
+boolean_exp (88)
     à esquerda: 40 41 42 43 44, à direita: 6 7 8 9 20 21
-op (84)
+op (89)
     à esquerda: 45 46 47 48 49, à direita: 20 21 26
-value (85)
+value (90)
     à esquerda: 50 51, à direita: 4 5 6 7 8 9 10 11 20 21 23 24 26
-type (86)
+type (91)
     à esquerda: 52 53 54 55 56, à direita: 39
 
 
@@ -598,8 +608,8 @@ Estado 34
    10 code: var assignment value . recursionOP
    11     | var assignment value . recursionOP code
 
-    SUBTRACAO        deslocar, e ir ao estado 50
-    SOMA             deslocar, e ir ao estado 51
+    SOMA             deslocar, e ir ao estado 50
+    SUBTRACAO        deslocar, e ir ao estado 51
     MULTIPLICACAO    deslocar, e ir ao estado 52
     DIVISAO          deslocar, e ir ao estado 53
     RESTO            deslocar, e ir ao estado 54
@@ -730,8 +740,8 @@ Estado 47
     4 code: declaration assignment value . recursionOP
     5     | declaration assignment value . recursionOP code
 
-    SUBTRACAO        deslocar, e ir ao estado 50
-    SOMA             deslocar, e ir ao estado 51
+    SOMA             deslocar, e ir ao estado 50
+    SUBTRACAO        deslocar, e ir ao estado 51
     MULTIPLICACAO    deslocar, e ir ao estado 52
     DIVISAO          deslocar, e ir ao estado 53
     RESTO            deslocar, e ir ao estado 54
@@ -768,16 +778,16 @@ Estado 49
 
 Estado 50
 
-   46 op: SUBTRACAO .
+   45 op: SOMA .
 
-    $padrão  reduzir usando a regra 46 (op)
+    $padrão  reduzir usando a regra 45 (op)
 
 
 Estado 51
 
-   45 op: SOMA .
+   46 op: SUBTRACAO .
 
-    $padrão  reduzir usando a regra 45 (op)
+    $padrão  reduzir usando a regra 46 (op)
 
 
 Estado 52
@@ -997,8 +1007,8 @@ Estado 69
 
    26 recursionOP: op value . recursionOP
 
-    SUBTRACAO        deslocar, e ir ao estado 50
-    SOMA             deslocar, e ir ao estado 51
+    SOMA             deslocar, e ir ao estado 50
+    SUBTRACAO        deslocar, e ir ao estado 51
     MULTIPLICACAO    deslocar, e ir ao estado 52
     DIVISAO          deslocar, e ir ao estado 53
     RESTO            deslocar, e ir ao estado 54
@@ -1493,8 +1503,8 @@ Estado 109
    20 code: for openParent var assignment value semi var boolean_exp value semi var assignment var . op value closeParent openKey code closeKey
    21     | for openParent var assignment value semi var boolean_exp value semi var assignment var . op value closeParent openKey code closeKey code
 
-    SUBTRACAO      deslocar, e ir ao estado 50
-    SOMA           deslocar, e ir ao estado 51
+    SOMA           deslocar, e ir ao estado 50
+    SUBTRACAO      deslocar, e ir ao estado 51
     MULTIPLICACAO  deslocar, e ir ao estado 52
     DIVISAO        deslocar, e ir ao estado 53
     RESTO          deslocar, e ir ao estado 54

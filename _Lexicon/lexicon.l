@@ -1,13 +1,11 @@
 	/** DEFINITION sec*/
 %{
 #include <stdio.h>
-#include "../_Header/syntactic.tab.h"
+#include "y.tab.h"
 //#define YY_DECL extern "C" int yylex()
 %}
 
 /*Utilizado para apresentar a linha do erro de sintaxe*/
-%option noyywrap
-%option noinput
 %option yylineno
 %{
 #define YY_USER_ACTION yylloc.first_line = yylineno;
@@ -85,13 +83,8 @@ string				{aspas}([^\"])*{aspas}
 {menor_igual}					{ return MENOR_IGUAL; }
 {igual}							{ return IGUAL; }
 {diferente}						{ return DIFERENTE; }
-" "								{ return ESPACO; }
 {barran}						{ return BARRAN; }
 {barrat}						{ return BARRAT; }
-{digito}						{ return DIGITO; }
-{numeral}						{ return NUMERAL; }
-{letra}							{ return LETRA; }
-{frac_opt}						{ return FRAC_OPT; }
 {num}							{ return NUM; }
 "break"							{ return RES_BREAK; }
 "case"							{ return RES_CASE; }
@@ -116,6 +109,6 @@ string				{aspas}([^\"])*{aspas}
 "while"							{ return RES_WHILE; }
 {nome}							{ return NOME; }
 {string}						{ return STRING; }
-.								{ return ALGUMA_COISA; }
+.								{ }
 %%
 

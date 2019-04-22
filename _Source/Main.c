@@ -1,4 +1,4 @@
-#include "../_Header/Main.hpp"
+#include "../_Header/Main.h"
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	int result = yyparse();
 
 	if(argc == 3) //testing
-		Tree::uncompile(stdout, syntax_tree->get_root());
+		uncompile(stdout, syntax_tree);
 	else
 	{
 		if(!result)
