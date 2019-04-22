@@ -1,7 +1,19 @@
 	/** DEFINITION sec*/
 %{
-#include<stdio.h>
+#include <stdio.h>
+#include "../_Header/syntactic.tab.h"
+//#define YY_DECL extern "C" int yylex()
 %}
+
+/*Utilizado para apresentar a linha do erro de sintaxe*/
+%option noyywrap
+%option noinput
+%option yylineno
+%{
+#define YY_USER_ACTION yylloc.first_line = yylineno;
+#define YY_USER_INIT yylineno = 1;
+%}
+
 
 negacao				"!"
 and					"&&"
@@ -32,36 +44,15 @@ maior_igual			">="
 menor_igual			"<="
 igual				"=="
 diferente			"!="
-espaco				(\n|" "|\t)+
+barran				"\n"
+barrat				"\t"
 digito				[0-9]
 numeral				{digito}+
 letra				[A-Z]|[a-z]
 frac_opt			"."{numeral}+
 num					{numeral}({frac_opt})?("E"("+"|"-")?{numeral}+)?
-res_break			_break_
-res_case 			_case_
-res_char			_char_
-res_dafault			_default_
-res_do				_do_
-res_double			_double_
-res_else			_else_
-res_float			_float_
-res_for				_for_
-res_goto			_goto_
-res_if				_if_
-res_int				_int_
-res_long			_long_
-res_return			_return_
-res_sizeof			_sizeof_
-res_static			_static_
-res_struct			_struct_
-res_typedef			_typedef_
-res_void			_void_
-res_while			_while_
 nome				({letra}+{digito}*)+(_*({letra}+{digito}*)+)*
 string				{aspas}([^\"])*{aspas}
-
-%option noyywrap
 
 %%
 	/** RULES sec (mand.) */
@@ -94,32 +85,35 @@ string				{aspas}([^\"])*{aspas}
 {menor_igual}					{ return MENOR_IGUAL; }
 {igual}							{ return IGUAL; }
 {diferente}						{ return DIFERENTE; }
-{espaco}						{ return ESPACO; }
+" "								{ return ESPACO; }
+{barran}						{ return BARRAN; }
+{barrat}						{ return BARRAT; }
 {digito}						{ return DIGITO; }
 {numeral}						{ return NUMERAL; }
 {letra}							{ return LETRA; }
 {frac_opt}						{ return FRAC_OPT; }
 {num}							{ return NUM; }
-{res_break}						{ return RES_BREAK; }
-{res_case}						{ return RES_CASE; }
-{res_char}						{ return RES_CHAR; }
-{res_dafault}					{ return RES_DEFAULT; }
-{res_do}						{ return RES_DO; }
-{res_double}					{ return RES_DOUBLE; }
-{res_else}						{ return RES_ELSE; }
-{res_float}						{ return RES_FLOAT; }
-{res_for}						{ return RES_FOR; }
-{res_goto}						{ return RES_GOTO; }
-{res_if}						{ return RES_IF; }
-{res_int}						{ return RES_INT; }
-{res_long}						{ return RES_LONG; }
-{res_return}					{ return RES_RETURN; }
-{res_sizeof}					{ return RES_SIZEOF; }
-{res_static}					{ return RES_STATIC; }
-{res_struct}					{ return RES_STRUCT; }
-{res_typedef}					{ return RES_TYPEDEF; }
-{res_void}						{ return RES_VOID; }
-{res_while}						{ return RES_WHILE; }
+"break"							{ return RES_BREAK; }
+"case"							{ return RES_CASE; }
+"char"							{ return RES_CHAR; }
+"default"						{ return RES_DEFAULT; }
+"do"							{ return RES_DO; }
+"double"						{ return RES_DOUBLE; }
+"else"							{ return RES_ELSE; }
+"float"							{ return RES_FLOAT; }
+"for"							{ return RES_FOR; }
+"goto"							{ return RES_GOTO; }
+"if"							{ return RES_IF; }
+"bool"							{ return RES_BOOL; }
+"int"							{ return RES_INT; }
+"long"							{ return RES_LONG; }
+"return"						{ return RES_RETURN; }
+"sizeof"						{ return RES_SIZEOF; }
+"static"						{ return RES_STATIC; }
+"struct"						{ return RES_STRUCT; }
+"typedef"						{ return RES_TYPEDEF; }
+"void"							{ return RES_VOID; }
+"while"							{ return RES_WHILE; }
 {nome}							{ return NOME; }
 {string}						{ return STRING; }
 .								{ return ALGUMA_COISA; }

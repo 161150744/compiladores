@@ -10,8 +10,7 @@ Node::Node(int nl, Node_type t, std::string lexeme,  /* Node* children */ ...){
     this->lexeme=lexeme;
     va_list ap;
     va_start(ap, NULL);
-        Node* arg=va_arg(ap, Node*);
-        for(; arg!=NULL; arg=va_arg(ap, Node*)){
+        for(Node *arg=va_arg(ap, Node*); arg!=NULL; arg=va_arg(ap, Node*)){
             this->children.push_back(arg);
         }
     va_end(ap);
