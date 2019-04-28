@@ -1,1 +1,4 @@
-if( a > b){int a;}
+if( a > b){
+    int a;
+}
+int a;

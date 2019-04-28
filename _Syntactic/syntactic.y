@@ -112,6 +112,7 @@
 %type<no> recursionDec
 %type<no> parameters
 %type<no> for
+%type<no> barran
 
 /* demais types ... */
 
@@ -138,11 +139,11 @@ code: declaration recursionDec {
     | declaration assignment value recursionOP code { 
             $$ = create_node(@1.first_line, code_node, "DeclaracaoAtribuicao", $1, $2, $3, $4, $5, NULL);
             }
-    | if openParent value boolean_exp value closeParent openKey code closeKey { 
-            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, NULL);
+    | if openParent value boolean_exp value closeParent openKey barran code barran closeKey { 
+            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NULL);
             }
-    | if openParent value boolean_exp value closeParent openKey code closeKey code { 
-            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
+    | if openParent value boolean_exp value closeParent openKey barran code barran closeKey barran code { 
+            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NULL);
             }
     | if openParent value boolean_exp value closeParent openKey code closeKey else openKey code closeKey {
             $$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NULL);
@@ -337,6 +338,9 @@ type: RES_FLOAT {
             }
     ;
 
+barran: BARRAN {
+        $$ = create_node(@1.first_line, bool_node, strdup(yytext), NULL);
+}
 
 /*demais codes ..*/
 
