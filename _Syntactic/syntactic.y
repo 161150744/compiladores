@@ -113,6 +113,7 @@
 %type<no> parameters
 %type<no> for
 %type<no> barran
+%type<no> while
 
 /* demais types ... */
 
@@ -196,9 +197,21 @@ code: declaration recursionDec {
     | for openParent var assignment value semi var boolean_exp value semi var assignment var op value closeParent openKey code closeKey code{
             $$ = create_node(@1.first_line, code_node, "for", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, NULL);
     }
+    
+    | while openParent value boolean_exp value closeParent openKey code closeKey { 
+            $$ = create_node(@1.first_line, code_node, "while", $1, $2, $3, $4, $5, $6, $7, $8, $9, NULL);
+            }
+    | while openParent value boolean_exp value closeParent openKey code closeKey code { 
+            $$ = create_node(@1.first_line, code_node, "while", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
+            }
     ;
 
 for: RES_FOR {
+            $$ = create_node(@1.first_line, for_node, strdup(yytext), NULL);
+}
+;
+
+while: RES_WHILE {
             $$ = create_node(@1.first_line, for_node, strdup(yytext), NULL);
 }
 ;
@@ -318,6 +331,9 @@ boolean_exp: IGUAL {
                     $$ = create_node(@1.first_line, boolean_exp_node, strdup(yytext), NULL);
                     }
            | MENOR_IGUAL {
+                    $$ = create_node(@1.first_line, boolean_exp_node, strdup(yytext), NULL);
+                    }
+           | DIFERENTE {
                     $$ = create_node(@1.first_line, boolean_exp_node, strdup(yytext), NULL);
                     }
            ;
