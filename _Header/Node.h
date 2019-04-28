@@ -50,6 +50,7 @@ typedef int Node_type;
 #define char_node										526
 #define double_node										527
 #define bool_node										528
+#define while_node                                      529
 
 
 

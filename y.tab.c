@@ -1765,7 +1765,7 @@ yyreduce:
   case 28:
 #line 212 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-            (yyval.no) = create_node((yylsp[0]).first_line, for_node, strdup(yytext), NULL);
+            (yyval.no) = create_node((yylsp[0]).first_line, while_node, strdup(yytext), NULL);
 }
 #line 1771 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1878,7 +1878,7 @@ yyreduce:
   case 42:
 #line 278 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-            (yyval.no) = create_node((yylsp[0]).first_line, openKey_node, strdup(yytext), NULL);
+            (yyval.no) = create_node((yylsp[0]).first_line, closeKey_node, strdup(yytext), NULL);
             }
 #line 1884 "y.tab.c" /* yacc.c:1646  */
     break;
