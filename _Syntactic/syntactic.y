@@ -210,7 +210,7 @@ for: RES_FOR {
 ;
 
 while: RES_WHILE {
-            $$ = create_node(@1.first_line, for_node, strdup(yytext), NULL);
+            $$ = create_node(@1.first_line, while_node, strdup(yytext), NULL);
 }
 ;
 
@@ -276,7 +276,7 @@ openKey: ABRE_CHAVE {
       ;
     
 closeKey: FECHA_CHAVE {
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            $$ = create_node(@1.first_line, closeKey_node, strdup(yytext), NULL);
             }
        ;
        
