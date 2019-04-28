@@ -1,7 +1,23 @@
 if( a > b){
     int a;
+}
+else {
+    int c;
 } 
 if( a > b){
     int b;
 }
 int c;
+int b;
+if( a > b){
+    int b;
+}
+for(i = 0; i < 10; i = i + 1){
+    int b;
+}
+main(b){
+    int i;
+    for(i = 0; i < 10; i = i + 1){
+        int b;
+    }
+}

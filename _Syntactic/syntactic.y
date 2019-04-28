@@ -169,6 +169,9 @@ code: declaration recursionDec {
     | var openParent closeParent semi code{
             $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, NULL);
             }
+    | var openParent closeParent openKey code closeKey{
+            $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, $6, NULL);
+            }
     | var openParent closeParent openKey code closeKey code{
             $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, $6, $7, NULL);
             }
@@ -180,6 +183,9 @@ code: declaration recursionDec {
             }
     | var openParent parameters closeParent semi code{
             $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, $6, NULL);
+            }
+    | var openParent parameters closeParent openKey code closeKey{
+            $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, $6, $7, NULL);
             }
     | var openParent parameters closeParent openKey code closeKey code{
             $$ = create_node(@1.first_line, code_node, "function", $1, $2, $3, $4, $5, $6, $7, $8, NULL);
@@ -234,6 +240,9 @@ var: NOME {
    ;
   
 semi: PONTO_E_VIRGULA {
+        $$ = create_node(@1.first_line, semi_node, strdup(yytext), NULL);
+        }
+        | PONTO_E_VIRGULA barran {
         $$ = create_node(@1.first_line, semi_node, strdup(yytext), NULL);
         }
     ;
