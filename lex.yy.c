@@ -370,8 +370,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 57
-#define YY_END_OF_BUFFER 58
+#define YY_NUM_RULES 56
+#define YY_END_OF_BUFFER 57
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -381,21 +381,21 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[141] =
     {   0,
-        0,    0,   58,   56,   31,   30,    1,    4,   20,   10,
-       56,   11,   12,    8,    6,   19,    7,   21,    9,   32,
-       18,   17,   25,    5,   24,   54,   15,   23,   16,   54,
-       54,   54,   54,   54,   54,   54,   54,   54,   54,   54,
-       54,   54,   13,   22,   14,   29,    0,   55,    2,    0,
-       32,    0,   27,   28,   26,   54,   54,    0,   54,   54,
-       54,   54,   54,   37,   54,   54,   54,   54,   43,   54,
-       54,   54,   54,   54,   54,   54,   54,    3,   32,    0,
-       32,   54,   54,   54,   54,   54,   54,   54,   54,   54,
-       54,   41,   54,   45,   54,   54,   54,   54,   54,   54,
+        0,    0,   57,   55,   30,   56,    1,    4,   20,   10,
+       55,   11,   12,    8,    6,   19,    7,   21,    9,   31,
+       18,   17,   25,    5,   24,   53,   15,   23,   16,   53,
+       53,   53,   53,   53,   53,   53,   53,   53,   53,   53,
+       53,   53,   13,   22,   14,   29,    0,   54,    2,    0,
+       31,    0,   27,   28,   26,   53,   53,    0,   53,   53,
+       53,   53,   53,   36,   53,   53,   53,   53,   42,   53,
+       53,   53,   53,   53,   53,   53,   53,    3,   31,    0,
+       31,   53,   53,   53,   53,   53,   53,   53,   53,   53,
+       53,   40,   53,   44,   53,   53,   53,   53,   53,   53,
 
-       54,   54,   54,   44,   54,   34,   35,   54,   54,   39,
-       54,   42,   46,   54,   54,   54,   54,   54,   52,   54,
-       33,   54,   54,   40,   54,   54,   54,   54,   54,   53,
-       54,   38,   47,   48,   49,   50,   54,   36,   51,    0
+       53,   53,   53,   43,   53,   33,   34,   53,   53,   38,
+       53,   41,   45,   53,   53,   53,   53,   53,   51,   53,
+       32,   53,   53,   39,   53,   53,   53,   53,   53,   52,
+       53,   37,   46,   47,   48,   49,   53,   35,   50,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -581,11 +581,11 @@ static const flex_int16_t yy_chk[418] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[58] =
+static const flex_int32_t yy_rule_can_match_eol[57] =
     {   0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -1047,148 +1047,142 @@ YY_RULE_SETUP
 { return DIFERENTE; }
 	YY_BREAK
 case 30:
-/* rule 30 can match eol */
-YY_RULE_SETUP
-#line 87 "_Lexicon/lexicon.l"
-{ return BARRAN; }
-	YY_BREAK
-case 31:
 YY_RULE_SETUP
 #line 88 "_Lexicon/lexicon.l"
 { return BARRAT; }
 	YY_BREAK
-case 32:
+case 31:
 YY_RULE_SETUP
 #line 89 "_Lexicon/lexicon.l"
 { return NUM; }
 	YY_BREAK
-case 33:
+case 32:
 YY_RULE_SETUP
 #line 90 "_Lexicon/lexicon.l"
 { return RES_BREAK; }
 	YY_BREAK
-case 34:
+case 33:
 YY_RULE_SETUP
 #line 91 "_Lexicon/lexicon.l"
 { return RES_CASE; }
 	YY_BREAK
-case 35:
+case 34:
 YY_RULE_SETUP
 #line 92 "_Lexicon/lexicon.l"
 { return RES_CHAR; }
 	YY_BREAK
-case 36:
+case 35:
 YY_RULE_SETUP
 #line 93 "_Lexicon/lexicon.l"
 { return RES_DEFAULT; }
 	YY_BREAK
-case 37:
+case 36:
 YY_RULE_SETUP
 #line 94 "_Lexicon/lexicon.l"
 { return RES_DO; }
 	YY_BREAK
-case 38:
+case 37:
 YY_RULE_SETUP
 #line 95 "_Lexicon/lexicon.l"
 { return RES_DOUBLE; }
 	YY_BREAK
-case 39:
+case 38:
 YY_RULE_SETUP
 #line 96 "_Lexicon/lexicon.l"
 { return RES_ELSE; }
 	YY_BREAK
-case 40:
+case 39:
 YY_RULE_SETUP
 #line 97 "_Lexicon/lexicon.l"
 { return RES_FLOAT; }
 	YY_BREAK
-case 41:
+case 40:
 YY_RULE_SETUP
 #line 98 "_Lexicon/lexicon.l"
 { return RES_FOR; }
 	YY_BREAK
-case 42:
+case 41:
 YY_RULE_SETUP
 #line 99 "_Lexicon/lexicon.l"
 { return RES_GOTO; }
 	YY_BREAK
-case 43:
+case 42:
 YY_RULE_SETUP
 #line 100 "_Lexicon/lexicon.l"
 { return RES_IF; }
 	YY_BREAK
-case 44:
+case 43:
 YY_RULE_SETUP
 #line 101 "_Lexicon/lexicon.l"
 { return RES_BOOL; }
 	YY_BREAK
-case 45:
+case 44:
 YY_RULE_SETUP
 #line 102 "_Lexicon/lexicon.l"
 { return RES_INT; }
 	YY_BREAK
-case 46:
+case 45:
 YY_RULE_SETUP
 #line 103 "_Lexicon/lexicon.l"
 { return RES_LONG; }
 	YY_BREAK
-case 47:
+case 46:
 YY_RULE_SETUP
 #line 104 "_Lexicon/lexicon.l"
 { return RES_RETURN; }
 	YY_BREAK
-case 48:
+case 47:
 YY_RULE_SETUP
 #line 105 "_Lexicon/lexicon.l"
 { return RES_SIZEOF; }
 	YY_BREAK
-case 49:
+case 48:
 YY_RULE_SETUP
 #line 106 "_Lexicon/lexicon.l"
 { return RES_STATIC; }
 	YY_BREAK
-case 50:
+case 49:
 YY_RULE_SETUP
 #line 107 "_Lexicon/lexicon.l"
 { return RES_STRUCT; }
 	YY_BREAK
-case 51:
+case 50:
 YY_RULE_SETUP
 #line 108 "_Lexicon/lexicon.l"
 { return RES_TYPEDEF; }
 	YY_BREAK
-case 52:
+case 51:
 YY_RULE_SETUP
 #line 109 "_Lexicon/lexicon.l"
 { return RES_VOID; }
 	YY_BREAK
-case 53:
+case 52:
 YY_RULE_SETUP
 #line 110 "_Lexicon/lexicon.l"
 { return RES_WHILE; }
 	YY_BREAK
-case 54:
+case 53:
 YY_RULE_SETUP
 #line 111 "_Lexicon/lexicon.l"
 { return NOME; }
 	YY_BREAK
-case 55:
-/* rule 55 can match eol */
+case 54:
+/* rule 54 can match eol */
 YY_RULE_SETUP
 #line 112 "_Lexicon/lexicon.l"
 { return STRING; }
 	YY_BREAK
-case 56:
+case 55:
 YY_RULE_SETUP
 #line 113 "_Lexicon/lexicon.l"
 { }
 	YY_BREAK
-case 57:
+case 56:
 YY_RULE_SETUP
 #line 114 "_Lexicon/lexicon.l"
 ECHO;
 	YY_BREAK
-#line 1192 "lex.yy.c"
+#line 1186 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

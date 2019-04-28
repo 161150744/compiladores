@@ -57,7 +57,7 @@
 %token IGUAL
 %token DIFERENTE
 %token ESPACO
-%token BARRAN
+// %token BARRAN
 %token BARRAT
 %token DIGITO
 %token NUMERAL
@@ -112,7 +112,7 @@
 %type<no> recursionDec
 %type<no> parameters
 %type<no> for
-%type<no> barran
+// %type<no> barran
 %type<no> while
 
 /* demais types ... */
@@ -255,9 +255,9 @@ var: NOME {
 semi: PONTO_E_VIRGULA {
         $$ = create_node(@1.first_line, semi_node, strdup(yytext), NULL);
         }
-        | PONTO_E_VIRGULA barran {
-        $$ = create_node(@1.first_line, semi_node, strdup(yytext), NULL);
-        }
+        // | PONTO_E_VIRGULA barran {
+        // $$ = create_node(@1.first_line, semi_node, strdup(yytext), NULL);
+        // }
     ;
     
 comma: VIRGULA {
@@ -278,29 +278,29 @@ else: RES_ELSE {
 openKey: ABRE_CHAVE {
             $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
             }
-        | ABRE_CHAVE barran {
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
-        | barran ABRE_CHAVE {
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
-        | barran ABRE_CHAVE barran{
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
+        // | ABRE_CHAVE barran {
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
+        // | barran ABRE_CHAVE {
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
+        // | barran ABRE_CHAVE barran{
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
       ;
     
 closeKey: FECHA_CHAVE {
             $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
             }
-        | FECHA_CHAVE barran {
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
-        | barran FECHA_CHAVE {
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
-        | barran FECHA_CHAVE barran{
-            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
-            }
+        // | FECHA_CHAVE barran {
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
+        // | barran FECHA_CHAVE {
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
+        // | barran FECHA_CHAVE barran{
+        //     $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+        //     }
        ;
        
 openParent: ABRE_PARENTESES {
@@ -381,9 +381,9 @@ type: RES_FLOAT {
             }
     ;
 
-barran: BARRAN {
-        $$ = create_node(@1.first_line, bool_node, strdup(yytext), NULL);
-}
+// barran: BARRAN {
+//         $$ = create_node(@1.first_line, bool_node, strdup(yytext), NULL);
+// }
 
 /*demais codes ..*/
 

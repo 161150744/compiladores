@@ -42,7 +42,7 @@ maior_igual			">="
 menor_igual			"<="
 igual				"=="
 diferente			"!="
-barran				"\n"
+
 barrat				"\t"
 digito				[0-9]
 numeral				{digito}+
@@ -83,7 +83,7 @@ string				{aspas}([^\"])*{aspas}
 {menor_igual}					{ return MENOR_IGUAL; }
 {igual}							{ return IGUAL; }
 {diferente}						{ return DIFERENTE; }
-{barran}						{ return BARRAN; }
+
 {barrat}						{ return BARRAT; }
 {num}							{ return NUM; }
 "break"							{ return RES_BREAK; }
