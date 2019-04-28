@@ -28,7 +28,7 @@
 # <a name="Execução"></a>Execução<br>
   Para executar utilize: </br>
 	```
-	$ make && ./a.out <entrada>
+	$ make && ./compiler <entrada>
 	```
   
 # <a name="Desenvolvedores"></a>Desenvolvedores<br>
