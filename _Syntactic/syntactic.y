@@ -139,17 +139,17 @@ code: declaration recursionDec {
     | declaration assignment value recursionOP code { 
             $$ = create_node(@1.first_line, code_node, "DeclaracaoAtribuicao", $1, $2, $3, $4, $5, NULL);
             }
-    | if openParent value boolean_exp value closeParent openKey barran code barran closeKey { 
-            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NULL);
+    | if openParent value boolean_exp value closeParent openKey code closeKey { 
+            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, NULL);
             }
-    | if openParent value boolean_exp value closeParent openKey barran code barran closeKey barran code { 
-            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NULL);
+    | if openParent value boolean_exp value closeParent openKey code closeKey code { 
+            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
             }
     | if openParent value boolean_exp value closeParent openKey code closeKey else openKey code closeKey {
             $$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NULL);
             }
-    | if value boolean_exp value openKey code closeKey else openKey code closeKey code {
-            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NULL);
+    | if openParent value boolean_exp value closeParent openKey code closeKey else openKey code closeKey code {
+            $$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NULL);
             }
     | var assignment value recursionOP {
             $$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, NULL);
@@ -256,10 +256,28 @@ else: RES_ELSE {
 openKey: ABRE_CHAVE {
             $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
             }
+        | ABRE_CHAVE barran {
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
+        | barran ABRE_CHAVE {
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
+        | barran ABRE_CHAVE barran{
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
       ;
     
 closeKey: FECHA_CHAVE {
-            $$ = create_node(@1.first_line, closeKey_node, strdup(yytext), NULL);
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
+        | FECHA_CHAVE barran {
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
+        | barran FECHA_CHAVE {
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
+            }
+        | barran FECHA_CHAVE barran{
+            $$ = create_node(@1.first_line, openKey_node, strdup(yytext), NULL);
             }
        ;
        
