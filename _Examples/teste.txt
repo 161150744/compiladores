@@ -1,3 +1,0 @@
-_int_ main(_void_){
-    printf("ola");
-}
