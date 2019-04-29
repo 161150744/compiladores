@@ -123,7 +123,7 @@ int height(Node *n) ;
  *  @param n : the root node of the tree. Must abort the program if 'n' is NULL.
  *
  */
-void uncompile(FILE* outfile, Node *n) ;
+void uncompile(Node *n) ;
 
 
 #endif
