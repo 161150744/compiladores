@@ -1,4 +1,4 @@
-#include "../_Header/Main.hpp"
+#include "../_Header/Main.h"
 
 int main(int argc, char* argv[])
 {
@@ -17,15 +17,13 @@ int main(int argc, char* argv[])
 
 	int result = yyparse();
 
-	if(argc == 3) //testing
-		Tree::uncompile(stdout, syntax_tree->get_root());
+	// uncompile(syntax_tree);
+	// printf("altura da arvore: %d\n", height(syntax_tree));
+	if(!result)
+		printf("OKAY.\n");
 	else
-	{
-		if(!result)
-			printf("OKAY.\n");
-		else
-			printf("ERROR.\n");
-	}
+		printf("ERROR.\n");
+	deep_free_node(syntax_tree);
 
 	return 0;
 }
