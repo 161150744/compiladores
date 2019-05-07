@@ -51,6 +51,7 @@ typedef int Node_type;
 #define double_node										527
 #define bool_node										528
 #define while_node                                      529
+#define printf_node                                     530
 
 
 

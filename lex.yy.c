@@ -1175,7 +1175,7 @@ YY_RULE_SETUP
 case 54:
 YY_RULE_SETUP
 #line 111 "_Lexicon/lexicon.l"
-{ return PRINTF; }
+{ printf("print\n");return PRINTF; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP

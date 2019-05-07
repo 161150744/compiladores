@@ -21,6 +21,7 @@ main(b){
             int b;
         }
         int f;
+        printf(a);
         while(a > b){
             for(i = 0; i < 10; i = i + 1){
                 int g;
