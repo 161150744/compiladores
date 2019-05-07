@@ -106,7 +106,8 @@ extern int yydebug;
     NOME = 316,
     STRING = 317,
     ALGUMA_COISA = 318,
-    RES_BOOL = 319
+    RES_BOOL = 319,
+    PRINTF = 320
   };
 #endif
 /* Tokens.  */
@@ -172,6 +173,7 @@ extern int yydebug;
 #define STRING 317
 #define ALGUMA_COISA 318
 #define RES_BOOL 319
+#define PRINTF 320
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -183,7 +185,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * no;
 
-#line 187 "y.tab.h" /* yacc.c:1909  */
+#line 189 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

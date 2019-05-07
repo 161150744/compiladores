@@ -87,6 +87,7 @@
 %token STRING
 %token ALGUMA_COISA
 %token RES_BOOL
+%token PRINTF
 
 /* demais tokens ...*/
 
@@ -112,6 +113,7 @@
 %type<no> parameters
 %type<no> for
 %type<no> while
+%type<no> printf
 
 /* demais types ... */
 
@@ -202,6 +204,12 @@ code: declaration recursionDec {
     | while openParent value boolean_exp value closeParent openKey code closeKey code { 
             $$ = create_node(@1.first_line, code_node, "while", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
             }
+    | printf openParent value closeParent semi{ 
+            $$ = create_node(@1.first_line, code_node, "printf", $1, $2, $3, $4, $5, NULL);
+            }
+    | printf openParent value closeParent semi code{ 
+            $$ = create_node(@1.first_line, code_node, "printf", $1, $2, $3, $4, $5, $6, NULL);
+            }
     ;
 
 for: RES_FOR {
@@ -246,6 +254,13 @@ assignment: ATRIBUICAO {
 var: NOME {  
 
             $$ = create_node(@1.first_line, var_node, strdup(yytext), NULL);
+            }
+            
+   ;
+
+printf: PRINTF {  
+
+            $$ = create_node(@1.first_line, printf_node, strdup(yytext), NULL);
             }
             
    ;

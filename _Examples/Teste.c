@@ -16,16 +16,17 @@ for(i = 0; i < 10; i = i + 1){
 main(b){
     int i;
     for(i = 0; i < 10; i = i + 1){
-        if(a != b) {print(a);}
+        if(a != b) {int a;}
         else {
-            print(a);
+            int b;
         }
         int f;
         while(a > b){
-            print(a);
             for(i = 0; i < 10; i = i + 1){
                 int g;
             }
+
         }
     }
 }
+printf(a);

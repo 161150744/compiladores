@@ -107,6 +107,7 @@ string				{aspas}([^\"])*{aspas}
 "typedef"						{ return RES_TYPEDEF; }
 "void"							{ return RES_VOID; }
 "while"							{ return RES_WHILE; }
+"printf" 						{ return PRINTF; }
 {nome}							{ return NOME; }
 {string}						{ return STRING; }
 .								{ }
