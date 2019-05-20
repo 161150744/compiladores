@@ -54,7 +54,8 @@
 			char *t = malloc(sizeof(char)*2);
 			sprintf(t, "%03d(SP)", aux->desloc);
 			return t;
-		}else{			
+		}
+		else{			
 			printf("UNDEFINED: %s \n", id);
 			exit(0);
 		}
