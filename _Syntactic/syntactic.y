@@ -25,6 +25,7 @@
 %left NOT
 %left '+' '-'
 %left '*' '/'
+%right '=' 
 
 %token<cadeia> IDF
 %token NEGACAO
