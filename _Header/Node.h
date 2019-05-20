@@ -65,6 +65,8 @@ typedef struct _node {
    struct _node** children;
    unsigned int n_child;
 
+   struct node_tac* name;
+
 } Node;
 
 extern Node * syntax_tree;

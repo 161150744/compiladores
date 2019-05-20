@@ -118,7 +118,7 @@
 			sprintf(t, "%03d(SP)", aux->desloc);
 			return t;
 		}else{			
-			printf("UNDEFINED SYMBOL. %s \n", id);
+			printf("UNDEFINED: %s \n", id);
 			exit(0);
 		}
 	}
@@ -1607,7 +1607,7 @@ yyreduce:
 #line 172 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, code_node, "Raiz", (yyvsp[0].no), NULL);
-			cat_tac(&((yyval.no)->lexeme), &((yyvsp[0].no)->lexeme));
+			cat_tac(&((yyval.no)->name), &((yyvsp[0].no)->name));
 			syntax_tree = (yyval.no);
 		}
 #line 1614 "y.tab.c" /* yacc.c:1646  */

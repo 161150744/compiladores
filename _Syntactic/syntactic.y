@@ -171,7 +171,7 @@
 %%
 root: code{
 			$$ = create_node(@1.first_line, code_node, "Raiz", $1, NULL);
-			cat_tac(&($$->lexeme), &($1->lexeme));
+			cat_tac(&($$->name), &($1->name));
 			syntax_tree = $$;
 		}
 ;
