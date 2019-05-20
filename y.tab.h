@@ -176,7 +176,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 18 "_Syntactic/syntactic.y" /* yacc.c:1909  */
+#line 26 "_Syntactic/syntactic.y" /* yacc.c:1909  */
 
 	char* cadeia;
 	struct _node * no;

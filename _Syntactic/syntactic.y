@@ -5,8 +5,8 @@
 	#include<stdio.h>
 	#include<stdlib.h>
 	#include<string.h>
-	#include"../_Header/lista.h"
-	#include"../_Header/symbol_table.h"
+	#include"./_Header/lista.h"
+	#include"./_Header/symbol_table.h"
 
 	#include"./_Header/Node.h"
 
