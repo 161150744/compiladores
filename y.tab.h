@@ -78,36 +78,34 @@ extern int yydebug;
     DIFERENTE = 288,
     ESPACO = 289,
     BARRAT = 290,
-    DIGITO = 291,
-    NUMERAL = 292,
-    LETRA = 293,
-    FRAC_OPT = 294,
-    NUM = 295,
-    RES_BREAK = 296,
-    RES_CASE = 297,
-    RES_CHAR = 298,
-    RES_DEFAULT = 299,
-    RES_DO = 300,
-    RES_DOUBLE = 301,
-    RES_ELSE = 302,
-    RES_FLOAT = 303,
-    RES_FOR = 304,
-    RES_GOTO = 305,
-    RES_IF = 306,
-    RES_INT = 307,
-    RES_LONG = 308,
-    RES_RETURN = 309,
-    RES_SIZEOF = 310,
-    RES_STATIC = 311,
-    RES_STRUCT = 312,
-    RES_TYPEDEF = 313,
-    RES_VOID = 314,
-    RES_WHILE = 315,
-    NOME = 316,
-    STRING = 317,
-    ALGUMA_COISA = 318,
-    RES_BOOL = 319,
-    PRINTF = 320
+    LETRA = 291,
+    NUM = 292,
+    NUM_REAL = 293,
+    RES_BREAK = 294,
+    RES_CASE = 295,
+    RES_CHAR = 296,
+    RES_DEFAULT = 297,
+    RES_DO = 298,
+    RES_DOUBLE = 299,
+    RES_ELSE = 300,
+    RES_FLOAT = 301,
+    RES_FOR = 302,
+    RES_GOTO = 303,
+    RES_IF = 304,
+    RES_INT = 305,
+    RES_LONG = 306,
+    RES_RETURN = 307,
+    RES_SIZEOF = 308,
+    RES_STATIC = 309,
+    RES_STRUCT = 310,
+    RES_TYPEDEF = 311,
+    RES_VOID = 312,
+    RES_WHILE = 313,
+    NOME = 314,
+    STRING = 315,
+    ALGUMA_COISA = 316,
+    RES_BOOL = 317,
+    PRINTF = 318
   };
 #endif
 /* Tokens.  */
@@ -144,36 +142,34 @@ extern int yydebug;
 #define DIFERENTE 288
 #define ESPACO 289
 #define BARRAT 290
-#define DIGITO 291
-#define NUMERAL 292
-#define LETRA 293
-#define FRAC_OPT 294
-#define NUM 295
-#define RES_BREAK 296
-#define RES_CASE 297
-#define RES_CHAR 298
-#define RES_DEFAULT 299
-#define RES_DO 300
-#define RES_DOUBLE 301
-#define RES_ELSE 302
-#define RES_FLOAT 303
-#define RES_FOR 304
-#define RES_GOTO 305
-#define RES_IF 306
-#define RES_INT 307
-#define RES_LONG 308
-#define RES_RETURN 309
-#define RES_SIZEOF 310
-#define RES_STATIC 311
-#define RES_STRUCT 312
-#define RES_TYPEDEF 313
-#define RES_VOID 314
-#define RES_WHILE 315
-#define NOME 316
-#define STRING 317
-#define ALGUMA_COISA 318
-#define RES_BOOL 319
-#define PRINTF 320
+#define LETRA 291
+#define NUM 292
+#define NUM_REAL 293
+#define RES_BREAK 294
+#define RES_CASE 295
+#define RES_CHAR 296
+#define RES_DEFAULT 297
+#define RES_DO 298
+#define RES_DOUBLE 299
+#define RES_ELSE 300
+#define RES_FLOAT 301
+#define RES_FOR 302
+#define RES_GOTO 303
+#define RES_IF 304
+#define RES_INT 305
+#define RES_LONG 306
+#define RES_RETURN 307
+#define RES_SIZEOF 308
+#define RES_STATIC 309
+#define RES_STRUCT 310
+#define RES_TYPEDEF 311
+#define RES_VOID 312
+#define RES_WHILE 313
+#define NOME 314
+#define STRING 315
+#define ALGUMA_COISA 316
+#define RES_BOOL 317
+#define PRINTF 318
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -185,7 +181,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * no;
 
-#line 189 "y.tab.h" /* yacc.c:1909  */
+#line 185 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

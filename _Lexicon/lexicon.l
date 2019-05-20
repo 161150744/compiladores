@@ -44,12 +44,10 @@ igual				"=="
 diferente			"!="
 barran				"\n"
 barrat				"\t"
-digito				[0-9]
-numeral				{digito}+
 letra				[A-Z]|[a-z]
-frac_opt			"."{numeral}+
-num					{numeral}({frac_opt})?("E"("+"|"-")?{numeral}+)?
-nome				({letra}+{digito}*)+(_*({letra}+{digito}*)+)*
+num					[0-9]+
+num_real			[0-9]+.[0-9]+
+nome				({letra}+{num}*)+(_*({letra}+{num}*)+)*
 string				{aspas}([^\"])*{aspas}
 
 %%
@@ -86,6 +84,7 @@ string				{aspas}([^\"])*{aspas}
 {barran}						{ } 
 {barrat}						{ return BARRAT; }
 {num}							{ return NUM; }
+{num_real}						{ return NUM_REAL; }
 "break"							{ return RES_BREAK; }
 "case"							{ return RES_CASE; }
 "char"							{ return RES_CHAR; }

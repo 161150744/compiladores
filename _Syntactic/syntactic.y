@@ -58,11 +58,9 @@
 %token DIFERENTE
 %token ESPACO
 %token BARRAT
-%token DIGITO
-%token NUMERAL
 %token LETRA
-%token FRAC_OPT
 %token NUM
+%token NUM_REAL
 %token RES_BREAK
 %token RES_CASE
 %token RES_CHAR
@@ -352,6 +350,9 @@ value: var {
             $$ = create_node(@1.first_line, value_node, "Declaracao", $1, NULL);
             }
      | NUM {
+            $$ = create_node(@1.first_line, value_node, strdup(yytext), NULL);
+            }
+     | NUM_REAL {
             $$ = create_node(@1.first_line, value_node, strdup(yytext), NULL);
             }
      ;
