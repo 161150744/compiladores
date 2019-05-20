@@ -56,6 +56,8 @@ struct node_tac {
    struct node_tac* prev;
 };
 
+
+extern struct node_tac * table_TAC;
 /** \brief Imprime no arquivo apontado por 'out' o conteudo da lista apontada
  * por 'code'.
  *

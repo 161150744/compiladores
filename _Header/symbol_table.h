@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define PRIME 211 // 9901
 
@@ -21,7 +22,7 @@ typedef struct {
    int type;    /**< representacao do tipo da variavel. */
    int size;    /**< numero de Bytes necessarios para armazenamento. */
    int desloc;  /**< Endereco da proxima variavel. */
-   void* extra; /**< qualquer informacao extra. */
+   // void* extra; /**< qualquer informacao extra. */
 } entry_t ;
 
 
@@ -29,7 +30,7 @@ typedef struct {
 /** \brief Nodo da lista encadeada de entradas da tabela de simbolos
  *
  * Para cada hash calculado, a tabela de simbolos possui uma lista encadeada.
- * Seriam as entradas que dão conflito, todas mapeadas no indice certo da tabela.
+ * Seriam as entradas que dï¿½o conflito, todas mapeadas no indice certo da tabela.
  *
  */
 struct table_node_entry {
