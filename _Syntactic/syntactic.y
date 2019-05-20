@@ -5,12 +5,12 @@
 	#include<stdio.h>
 	#include<stdlib.h>
 	#include<string.h>
+	#include"./_Header/Node.h"
 	#include"./_Header/lista.h"
 	#include"./_Header/symbol_table.h"
 
-	#include"./_Header/Node.h"
-
 	#define UNDEFINED_SYMBOL_ERROR -21
+	#define INT 4
 
 	extern int yyerror(const char* msg);
 	extern int yylex();
@@ -21,7 +21,47 @@
 	int vars_size=0;
 	int temps_size=0;
 
+    entry_t *novo(char *lx){
+		entry_t* new_entry = (entry_t *) malloc(sizeof(entry_t));
+		new_entry->name = lx;
+		new_entry->type = 0; 
+		new_entry->desloc = vars_size;
+		new_entry->size = INT;
+		vars_size += INT;
+		return new_entry;
+    }
+
+	void verifica(char* lx){
+		if(!lookup(symbol_table, lx)){
+			printf("Redeclaration of the symbol %s\n",lx);
+		}
+		else if(insert(&symbol_table, novo(lx)) != 0){
+			printf("ERROR:%s\n",lx);
+			exit(0);
+		}
+	}
+
+	char *temp(){
+		char *t = malloc(sizeof(char)*2);
+		sprintf(t, "%03d(RX)", temps_size);
+		temps_size += 4;
+		return t;
+	}
+
+	char *mem(char *id){
+		entry_t* aux = lookup(symbol_table, id);
+		if(aux != NULL){       
+			char *t = malloc(sizeof(char)*2);
+			sprintf(t, "%03d(SP)", aux->desloc);
+			return t;
+		}else{			
+			printf("UNDEFINED: %s \n", id);
+			exit(0);
+		}
+	}
+
 %}
+
 
 %union {
 	char* cadeia;
@@ -131,6 +171,7 @@
 %%
 root: code{
 			$$ = create_node(@1.first_line, code_node, "Raiz", $1, NULL);
+			cat_tac(&($$->lexeme), &($1->lexeme));
 			syntax_tree = $$;
 		}
 ;
