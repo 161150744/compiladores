@@ -82,7 +82,7 @@ void append_inst_tac(struct node_tac ** code, struct tac * inst){
 
 
 void cat_tac(struct node_tac ** code_a, struct node_tac ** code_b){
-	if(*code_a=NULL){
+	if(*code_a==NULL){
 		*code_a=*code_b;
 	}
 	else if(*code_b!=NULL){
