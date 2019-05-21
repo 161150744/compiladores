@@ -5,13 +5,12 @@ else {int c;}
 if( a > b){
     int b;
 }
-int c;
 int d;
 if( a > b){
     int e;
 }
 for(i = 0; i < 10; i = i + 1){
-    int b;
+    int j;
 }
 main(b){
     int i;

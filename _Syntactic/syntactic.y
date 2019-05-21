@@ -21,7 +21,7 @@
 	int vars_size=0;
 	int temps_size=0;
 
-	entry_t *novo(char *lx){
+	entry_t* novo(char *lx){
 		entry_t* new_entry = (entry_t *) malloc(sizeof(entry_t));
 		new_entry->name = lx;
 		new_entry->type = 0; 
@@ -32,7 +32,7 @@
 	}
 
 	void verifica(char* lx){
-		if(!lookup(symbol_table, lx)){
+		if(lookup(symbol_table, lx)){
 			printf("Redeclaration of the symbol %s\n",lx);
 		}
 		else if(insert(&symbol_table, novo(lx)) != 0){
@@ -204,18 +204,20 @@ code: declaration recursionDec {
 	| var assignment value recursionOP {
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, NULL);
 			// TODO
-			if(!lookup(tabela_simbolos, $1->lexeme)){
-				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
-			}
-			else{
-				if(strcmp($4->children[0]->lexeme, ";")==0){
+			// if(!lookup(tabela_simbolos, $1->lexeme)){
+			// 	printf("%s NAO FOI DECLARADA\n", $1->lexeme);
+			// }
+			// else{
+			// 	if(strcmp($4->children[0]->lexeme, ";")==0){
 					
-				}
-			}
+			// 	}
+			// }
+			// verifica($1->lexeme);
 			}
 	| var assignment value recursionOP code{
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, $5, NULL);
 			// TODO
+			// verifica($1->lexeme);
 			}
 
 
@@ -366,8 +368,9 @@ closeParent: FECHA_PARENTESES {
 	
 declaration: type var {
 					$$ = create_node(@1.first_line, declaration_node, "NT-Declaracao", $1, $2, NULL);
-					entry_t *entry=novo($2);
-					insert(symbol_table, entry);
+					// entry_t *entry=novo($2->lexeme);
+					// insert(&symbol_table, entry);
+					verifica($2->lexeme);
 					}
 		   ;
 
@@ -437,8 +440,7 @@ type: RES_FLOAT {
 			}
 	;
 
-
-
+	
 
 %%
  /* A partir daqui, insere-se qlqer codigo C necessario.
