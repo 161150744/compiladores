@@ -1,5 +1,6 @@
 if( a > b){
     int a;
+    b = 10;
 }
 else {int c;} 
 if( a > b){
@@ -11,13 +12,16 @@ if( a > b){
 }
 for(i = 0; i < 10; i = i + 1){
     int j;
+    b = 10;
+    int a;
+    i = 3;
 }
 main(b){
     int i;
     for(i = 0; i < 10; i = i + 1){
         if(a != b) {int a;}
         else {
-            int b;
+            int b = 10;
         }
         int f;
         printf(a);

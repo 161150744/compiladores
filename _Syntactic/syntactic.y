@@ -204,20 +204,18 @@ code: declaration recursionDec {
 	| var assignment value recursionOP {
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, NULL);
 			// TODO
-			// if(!lookup(tabela_simbolos, $1->lexeme)){
-			// 	printf("%s NAO FOI DECLARADA\n", $1->lexeme);
-			// }
-			// else{
-			// 	if(strcmp($4->children[0]->lexeme, ";")==0){
+			if(!lookup(symbol_table, $1->lexeme)){
+				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
+			}
+			else{
+				if(strcmp($4->children[0]->lexeme, ";")==0){
 					
-			// 	}
-			// }
-			// verifica($1->lexeme);
+				}
+			}
 			}
 	| var assignment value recursionOP code{
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, $5, NULL);
 			// TODO
-			// verifica($1->lexeme);
 			}
 
 
@@ -368,8 +366,6 @@ closeParent: FECHA_PARENTESES {
 	
 declaration: type var {
 					$$ = create_node(@1.first_line, declaration_node, "NT-Declaracao", $1, $2, NULL);
-					// entry_t *entry=novo($2->lexeme);
-					// insert(&symbol_table, entry);
 					verifica($2->lexeme);
 					}
 		   ;
