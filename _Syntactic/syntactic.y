@@ -203,19 +203,25 @@ code: declaration recursionDec {
 			}
 	| var assignment value recursionOP {
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, NULL);
-			// TODO
 			if(!lookup(symbol_table, $1->lexeme)){
 				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
 			}
 			else{
 				if(strcmp($4->children[0]->lexeme, ";")==0){
-					
+					// TODO
 				}
 			}
 			}
 	| var assignment value recursionOP code{
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, $5, NULL);
-			// TODO
+			if(!lookup(symbol_table, $1->lexeme)){
+				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
+			}
+			else{
+				if(strcmp($4->children[0]->lexeme, ";")==0){
+					// TODO
+				}
+			}
 			}
 
 
