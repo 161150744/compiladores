@@ -6,6 +6,8 @@
 
 int numList=1;
 
+struct node_tac *lista = NULL;
+
 struct node_tac * table_TAC;
 
 struct tac* create_inst_tac(const char* res, const char* arg1, const char* op, const char* arg2){

@@ -17,7 +17,8 @@
 	extern char * yytext;
 	extern Node * syntax_tree;
 	extern struct node_tac * table_TAC;
-	symbol_t symbol_table;
+	extern symbol_t *tabela_simbolos;
+	extern struct node_tac *lista;
 	int vars_size=0;
 	int temps_size=0;
 
@@ -32,10 +33,10 @@
 	}
 
 	void verifica(char* lx){
-		if(lookup(symbol_table, lx)){
+		if(lookup(*tabela_simbolos, lx)){
 			printf("Redeclaration of the symbol %s\n",lx);
 		}
-		else if(insert(&symbol_table, novo(lx)) != 0){
+		else if(insert(& *tabela_simbolos, novo(lx)) != 0){
 			printf("ERROR:%s\n",lx);
 			exit(0);
 		}
@@ -49,7 +50,7 @@
 	}
 
 	char *mem(char *id){
-		entry_t* aux = lookup(symbol_table, id);
+		entry_t* aux = lookup(*tabela_simbolos, id);
 		if(aux != NULL){       
 			char *t = malloc(sizeof(char)*2);
 			sprintf(t, "%03d(SP)", aux->desloc);
@@ -172,7 +173,7 @@
 %%
 root: code{
 			$$ = create_node(@1.first_line, code_node, "Raiz", $1, NULL);
-			cat_tac(&($$->name), &($1->name));
+			cat_tac(&lista, &($1->name));
 			syntax_tree = $$;
 		}
 ;
@@ -203,23 +204,123 @@ code: declaration recursionDec {
 			}
 	| var assignment value recursionOP {
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, NULL);
-			if(!lookup(symbol_table, $1->lexeme)){
+			if(!lookup(*tabela_simbolos, $1->lexeme)){
 				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
 			}
 			else{
 				if(strcmp($4->children[0]->lexeme, ";")==0){
-					// TODO
+					struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+		            if(!is_leaf($3)){
+                        aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, "", "");
+		            }
+		            else{
+		                aux = create_inst_tac($1->lexeme, $3->lexeme, "", "");
+		            }
+					append_inst_tac(&lista, aux);
+				}
+				else{
+					Node *p=NULL;
+					int i, n_op=0;
+					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
+						n_op++;
+					}
+					vet_t *v;
+					v=(vet_t*)malloc(n_op*sizeof(vet_t));
+					n_op=0;
+					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
+						v[n_op].op=malloc(sizeof(strlen(p->children[0]->lexeme)));
+						strcpy(v[n_op].op, p->children[0]->lexeme);
+						if (is_leaf(p->children[1])){
+                            v[n_op].var = malloc(sizeof(strlen(p->children[1]->lexeme)));
+                            strcpy(v[n_op].var, p->children[1]->lexeme);
+                        }
+						else{
+                            v[n_op].var = malloc(sizeof(strlen(p->children[1]->children[0]->lexeme)));
+                            strcpy(v[n_op].var, p->children[1]->children[0]->lexeme);
+                        }
+                        n_op++;
+					}
+					for(i=n_op-1; i>=0; i--){
+                        struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
+                        if (i == 0){
+                            //printf("%s %s %s %s\n", $1->lexeme, $3->lexeme, v[i].op, v[i].var);
+                            if(!is_leaf($3)){
+                                aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, v[i].op, v[i].var);
+                                append_inst_tac(&lista, aux);
+                            }
+                            else{
+                                aux = create_inst_tac($1->lexeme, $3->lexeme, v[i].op, v[i].var);
+                                append_inst_tac(&lista, aux);
+                            }
+                        }
+                        else{
+                            //printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
+                            aux = create_inst_tac($1->lexeme, v[i-1].var, v[i].op, v[i].var);
+                            append_inst_tac(&lista, aux);
+                        }
+                    }
+					//TODO
 				}
 			}
 			}
 	| var assignment value recursionOP code{
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, $5, NULL);
-			if(!lookup(symbol_table, $1->lexeme)){
+			if(!lookup(*tabela_simbolos, $1->lexeme)){
 				printf("%s NAO FOI DECLARADA\n", $1->lexeme);
 			}
 			else{
 				if(strcmp($4->children[0]->lexeme, ";")==0){
-					// TODO
+					struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+		            if(!is_leaf($3)){
+                        aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, "", "");
+		            }
+		            else{
+		                aux = create_inst_tac($1->lexeme, $3->lexeme, "", "");
+		            }
+					append_inst_tac(&lista, aux);
+				}
+				else{
+					Node *p=NULL;
+					int i, n_op=0;
+					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
+						n_op++;
+					}
+					vet_t *v;
+					v=(vet_t*)malloc(n_op*sizeof(vet_t));
+					n_op=0;
+					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
+						v[n_op].op=malloc(sizeof(strlen(p->children[0]->lexeme)));
+						strcpy(v[n_op].op, p->children[0]->lexeme);
+						if (is_leaf(p->children[1])){
+                            v[n_op].var = malloc(sizeof(strlen(p->children[1]->lexeme)));
+                            strcpy(v[n_op].var, p->children[1]->lexeme);
+                        }
+						else{
+                            v[n_op].var = malloc(sizeof(strlen(p->children[1]->children[0]->lexeme)));
+                            strcpy(v[n_op].var, p->children[1]->children[0]->lexeme);
+                        }
+                        n_op++;
+					}
+					for(i=n_op-1; i>=0; i--){
+                        struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
+                        if (i == 0){
+                            //printf("%s %s %s %s\n", $1->lexeme, $3->lexeme, v[i].op, v[i].var);
+                            if(!is_leaf($3)){
+                                aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, v[i].op, v[i].var);
+                                append_inst_tac(&lista, aux);
+                            }
+                            else{
+                                aux = create_inst_tac($1->lexeme, $3->lexeme, v[i].op, v[i].var);
+                                append_inst_tac(&lista, aux);
+                            }
+                        }
+                        else{
+                            //printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
+                            aux = create_inst_tac($1->lexeme, v[i-1].var, v[i].op, v[i].var);
+                            append_inst_tac(&lista, aux);
+                        }
+                    }
+					//TODO
 				}
 			}
 			}

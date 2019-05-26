@@ -9,6 +9,8 @@
 #include "../_Header/symbol_table.h"
 #define EOS '\0'
 
+symbol_t *tabela_simbolos = NULL;
+
 int hashpjw(s)
 char *s;
 {

@@ -88,4 +88,17 @@ void append_inst_tac(struct node_tac ** code, struct tac * inst);
  */
 void cat_tac(struct node_tac ** code_a, struct node_tac ** code_b);
 
+typedef struct vet {
+   char *op;   /* "+", "-", ":=", "if", etc... */
+   char *var;  /* "TMP100" */
+}vet_t;
+
+/**
+ * Estrutura de dados para armazenar os Temporarios (RX).
+ */
+typedef struct temp {
+   int desloc;
+   /*os dados da atribuicao Ex: 000(RX) + 5*/
+}temp_t;
+
 #endif

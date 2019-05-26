@@ -1,3 +1,6 @@
+int b;
+int i;
+
 if( a > b){
     int a;
     b = 10;
