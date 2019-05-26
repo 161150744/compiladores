@@ -46,19 +46,54 @@ void print_inst_tac(FILE* out, struct tac i){
 }
 
 void print_tac(FILE* out, struct node_tac * code){
-	//fprintf(out, "%d\n%d\n", vars_size, temps_size);
-	printf("%d\n%d\n", vars_size, temps_size);
-	struct node_tac * aux;
-	aux=code;
-	if(aux==NULL){
-		printf(":(\n");
-	}
-	while(aux!=NULL){
-		//fprintf(out, "%03d:   ", aux->number-1);
-		printf("%03d:   ", aux->number-1);
-		aux=aux->next;
-	}
-	printf("\n");
+    struct node_tac *aux = lista;
+    entry_t *aux_deslc = NULL;
+    int bytesSP = vars_size, bytesRX = 0;
+    int hash, type;
+    char op[5], strop[5];
+    
+    printf("%d\n", bytesSP);
+    printf("%d\n", bytesRX);
+    aux = lista;
+    while(aux != NULL){
+        entry_t *res = lookup(*tabela_simbolos, aux->inst->res);
+        entry_t *arg1 = lookup(*tabela_simbolos, aux->inst->arg1);
+        entry_t *arg2 = lookup(*tabela_simbolos, aux->inst->arg2);
+        hash = hashpjw(aux->inst->res);
+        type = tabela_simbolos->entries[hash]->entry_data->type;
+        strcpy(op, aux->inst->op);
+        //printf("OP %s\n", op);
+        if(strcmp(op, "+") == 0){
+            strcpy(strop, "SUM");
+        }
+        else if(strcmp(op, "-") == 0){
+            strcpy(strop, "SUB");
+        }
+        else if(strcmp(op, "*") == 0){
+            strcpy(strop, "MUL");
+        }
+        else if(strcmp(op, "/") == 0){
+            strcpy(strop, "DIV");
+        }
+        else{
+            strcpy(strop, "");
+        }
+        if(res && !arg1 && !arg2){ //VALUE VALUE
+            printf("%.3d: %.3d(SP) := %s %s %s\n", aux->number, res->desloc, aux->inst->arg1, strop, aux->inst->arg2);
+        }
+        else if(res && !arg1 && arg2){ //VALUE VAR
+            printf("%.3d: %.3d(SP) := %s %s %.3d(SP)\n", aux->number, res->desloc, aux->inst->arg1, strop, arg2->desloc);
+        }
+        else if(res && arg1 && !arg2){ //VAR VALUE
+            printf("%.3d: %.3d(SP) := %.3d(SP) %s %s\n", aux->number, res->desloc, arg1->desloc, strop, aux->inst->arg2);
+        }
+        else if(res && arg1 && arg2){ //VAR VAR
+            printf("%.3d: %.3d(SP) := %.3d(SP) %s %.3d(SP)\n", aux->number, res->desloc, arg1->desloc, strop, arg2->desloc);
+        }
+        aux = aux->next;
+    }
+    fclose(out);
+
 }
 
 

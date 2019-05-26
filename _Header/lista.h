@@ -8,9 +8,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include "symbol_table.h"
 
 extern int vars_size;
 extern int temps_size;
+
+extern symbol_t *tabela_simbolos;
 
 
 /**
