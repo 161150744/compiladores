@@ -90,17 +90,17 @@ int height(Node* n)
 		return 1;
 }
 
-void uncompile(Node *n){	
+void uncompile(FILE* file, Node *n){	
 	assert(n != NULL);
 	int i;
 	//Somente imprime o lexema dos "nos folha"
 	if(is_leaf(n)) {
-		printf("%d %d %s \n", n->line_num, n->type, n->lexeme);
+		fprintf(file, "%d %d %s \n", n->line_num, n->type, n->lexeme);
 	}
     //Faz a busca em profundidade a esquerda
 	if(n != NULL) {
 		for (i = 0; i < n->n_child; i++) {
-			uncompile(n->children[i]);
+			uncompile(file, n->children[i]);
 		}
 	}
 }

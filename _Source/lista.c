@@ -52,8 +52,8 @@ void print_tac(FILE* out, struct node_tac * code){
     int hash, type;
     char op[5], strop[5];
     
-    printf("%d\n", bytesSP);
-    printf("%d\n", bytesRX);
+    fprintf(out, "%d\n", bytesSP);
+    fprintf(out, "%d\n", bytesRX);
     aux = lista;
     while(aux != NULL){
         entry_t *res = lookup(*tabela_simbolos, aux->inst->res);
@@ -79,16 +79,16 @@ void print_tac(FILE* out, struct node_tac * code){
             strcpy(strop, "");
         }
         if(res && !arg1 && !arg2){ //VALUE VALUE
-            printf("%.3d: %.3d(SP) := %s %s %s\n", aux->number, res->desloc, aux->inst->arg1, strop, aux->inst->arg2);
+            fprintf(out, "%.3d: %.3d(SP) := %s %s %s\n", aux->number, res->desloc, aux->inst->arg1, strop, aux->inst->arg2);
         }
         else if(res && !arg1 && arg2){ //VALUE VAR
-            printf("%.3d: %.3d(SP) := %s %s %.3d(SP)\n", aux->number, res->desloc, aux->inst->arg1, strop, arg2->desloc);
+            fprintf(out, "%.3d: %.3d(SP) := %s %s %.3d(SP)\n", aux->number, res->desloc, aux->inst->arg1, strop, arg2->desloc);
         }
         else if(res && arg1 && !arg2){ //VAR VALUE
-            printf("%.3d: %.3d(SP) := %.3d(SP) %s %s\n", aux->number, res->desloc, arg1->desloc, strop, aux->inst->arg2);
+            fprintf(out, "%.3d: %.3d(SP) := %.3d(SP) %s %s\n", aux->number, res->desloc, arg1->desloc, strop, aux->inst->arg2);
         }
         else if(res && arg1 && arg2){ //VAR VAR
-            printf("%.3d: %.3d(SP) := %.3d(SP) %s %.3d(SP)\n", aux->number, res->desloc, arg1->desloc, strop, arg2->desloc);
+            fprintf(out, "%.3d: %.3d(SP) := %.3d(SP) %s %.3d(SP)\n", aux->number, res->desloc, arg1->desloc, strop, arg2->desloc);
         }
         aux = aux->next;
     }

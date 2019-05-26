@@ -22,7 +22,7 @@
 	int vars_size=0;
 	int temps_size=0;
 
-	entry_t* novo(char *lx){
+	entry_t* novo(char *lx, char *type){
 		entry_t* new_entry = (entry_t *) malloc(sizeof(entry_t));
 		new_entry->name = lx;
 		new_entry->type = 0; 
@@ -32,11 +32,11 @@
 		return new_entry;
 	}
 
-	void verifica(char* lx){
+	void verifica(char* lx, char* type){
 		if(lookup(*tabela_simbolos, lx)){
 			printf("Redeclaration of the symbol %s\n",lx);
 		}
-		else if(insert(& *tabela_simbolos, novo(lx)) != 0){
+		else if(insert(& *tabela_simbolos, novo(lx, type)) != 0){
 			printf("ERROR:%s\n",lx);
 			exit(0);
 		}
@@ -473,7 +473,7 @@ closeParent: FECHA_PARENTESES {
 	
 declaration: type var {
 					$$ = create_node(@1.first_line, declaration_node, "NT-Declaracao", $1, $2, NULL);
-					verifica($2->lexeme);
+					verifica($2->lexeme, $1->lexeme);
 					}
 		   ;
 

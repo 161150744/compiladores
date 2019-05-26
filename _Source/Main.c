@@ -20,14 +20,17 @@ int main(int argc, char* argv[])
 
 	int result = yyparse();
 
-	printf("============== Sintatica ==============\n");
-	uncompile(syntax_tree);
-	
-	printf("============== Semantica ==============\n");
-	print_table(*tabela_simbolos);
-	
-	printf("================= Tac =================\n");
-	print_tac(stdout, lista);
+	FILE *Syntactic = fopen("_Output/Syntactic.txt", "w");
+	uncompile(Syntactic, syntax_tree);
+	fclose(Syntactic);
+
+	FILE *Semantics = fopen("_Output/Semantics.txt", "w");
+	print_file_table(Semantics, *tabela_simbolos);
+	fclose(Semantics);
+
+	FILE *Tac = fopen("_Output/Tac.txt", "w");
+	print_tac(Tac, lista);
+	fclose(Tac);
 
 	if(!result)
 		printf("OKAY.\n");
