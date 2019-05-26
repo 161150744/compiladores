@@ -46,16 +46,19 @@ void print_inst_tac(FILE* out, struct tac i){
 }
 
 void print_tac(FILE* out, struct node_tac * code){
-	fprintf(out, "%d\n%d\n", vars_size, temps_size);
+	//fprintf(out, "%d\n%d\n", vars_size, temps_size);
+	printf("%d\n%d\n", vars_size, temps_size);
 	struct node_tac * aux;
 	aux=code;
 	if(aux==NULL){
 		printf(":(\n");
 	}
 	while(aux!=NULL){
-		fprintf(out, "%03d:   ", aux->number-1);
+		//fprintf(out, "%03d:   ", aux->number-1);
+		printf("%03d:   ", aux->number-1);
 		aux=aux->next;
 	}
+	printf("\n");
 }
 
 

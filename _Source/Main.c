@@ -20,8 +20,15 @@ int main(int argc, char* argv[])
 
 	int result = yyparse();
 
-	// uncompile(syntax_tree);
-	// printf("altura da arvore: %d\n", height(syntax_tree));
+	printf("============== Sintatica ==============\n");
+	uncompile(syntax_tree);
+	
+	printf("============== Semantica ==============\n");
+	print_table(*tabela_simbolos);
+	
+	printf("================= Tac =================\n");
+	print_tac(stdout, lista);
+
 	if(!result)
 		printf("OKAY.\n");
 	else
