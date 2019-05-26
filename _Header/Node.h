@@ -51,6 +51,7 @@ typedef int Node_type;
 #define double_node										527
 #define bool_node										528
 #define while_node                                      529
+#define printf_node                                     530
 
 
 
@@ -63,6 +64,8 @@ typedef struct _node {
 
    struct _node** children;
    unsigned int n_child;
+
+   struct node_tac* name;
 
 } Node;
 
@@ -123,7 +126,7 @@ int height(Node *n) ;
  *  @param n : the root node of the tree. Must abort the program if 'n' is NULL.
  *
  */
-void uncompile(Node *n) ;
+void uncompile(FILE* file, Node *n) ;
 
 
 #endif

@@ -13,12 +13,25 @@ int main(int argc, char* argv[])
 		exit(-1);
 	}
 
+	tabela_simbolos = (symbol_t*)malloc(sizeof(symbol_t));
+	init_table(tabela_simbolos);
+
 	progname = argv[0];
 
 	int result = yyparse();
 
-	// uncompile(syntax_tree);
-	// printf("altura da arvore: %d\n", height(syntax_tree));
+	FILE *Syntactic = fopen("_Output/Syntactic.txt", "w");
+	uncompile(Syntactic, syntax_tree);
+	fclose(Syntactic);
+
+	FILE *Semantics = fopen("_Output/Semantics.txt", "w");
+	print_file_table(Semantics, *tabela_simbolos);
+	fclose(Semantics);
+
+	FILE *Tac = fopen("_Output/Tac.txt", "w");
+	print_tac(Tac, lista);
+	fclose(Tac);
+
 	if(!result)
 		printf("OKAY.\n");
 	else
