@@ -30,37 +30,19 @@ struct tac* create_inst_tac(const char* res, const char* arg1, const char* op, c
 }
 
 void print_inst_tac(FILE* out, struct tac i){
-	if(strcmp (i.op, "PRINTF")==0 && i.res==NULL){
-		fprintf(out, "PRINTF %s \n", i.res); 
-	}else if(strcmp(i.op, "PRINTF")==0 && i.res!=NULL){
-		fprintf(out, "PRINTF %s %s \n", i.arg1, i.res); 
-	}else if(strcmp(i.op, "ATT")==0){
-		fprintf(out, "%s := %s \n", i.res, i.arg1);
-	}else if(strcmp (i.op, "INC")==0){
-		fprintf(out, "%s := %s + 1\n", i.res, i.res);
-	}else if(strcmp(i.op, "DEC")==0){
-		fprintf(out, "%s := %s - 1\n", i.res, i.res);
-	}else{
-		fprintf(out, "%s := %s %s %s \n", i.res, i.arg1, i.op, i.arg2);
-	}
+	printf("\nnada aqui\n");
 }
 
 void print_tac(FILE* out, struct node_tac * code){
     struct node_tac *aux = lista;
     entry_t *aux_deslc = NULL;
     int bytesSP = vars_size, bytesRX = 0;
-    int hash, type;
     char op[5], strop[5];
     
     fprintf(out, "%d\n", bytesSP);
     fprintf(out, "%d\n", bytesRX);
     aux = lista;
     while(aux != NULL){
-        entry_t *res = lookup(*tabela_simbolos, aux->inst->res);
-        entry_t *arg1 = lookup(*tabela_simbolos, aux->inst->arg1);
-        entry_t *arg2 = lookup(*tabela_simbolos, aux->inst->arg2);
-        hash = hashpjw(aux->inst->res);
-        type = tabela_simbolos->entries[hash]->entry_data->type;
         strcpy(op, aux->inst->op);
         //printf("OP %s\n", op);
         if(strcmp(op, "+") == 0){
@@ -78,18 +60,7 @@ void print_tac(FILE* out, struct node_tac * code){
         else{
             strcpy(strop, "");
         }
-        if(res && !arg1 && !arg2){ //VALUE VALUE
-            fprintf(out, "%.3d: %.3d(SP) := %s %s %s\n", aux->number, res->desloc, aux->inst->arg1, strop, aux->inst->arg2);
-        }
-        else if(res && !arg1 && arg2){ //VALUE VAR
-            fprintf(out, "%.3d: %.3d(SP) := %s %s %.3d(SP)\n", aux->number, res->desloc, aux->inst->arg1, strop, arg2->desloc);
-        }
-        else if(res && arg1 && !arg2){ //VAR VALUE
-            fprintf(out, "%.3d: %.3d(SP) := %.3d(SP) %s %s\n", aux->number, res->desloc, arg1->desloc, strop, aux->inst->arg2);
-        }
-        else if(res && arg1 && arg2){ //VAR VAR
-            fprintf(out, "%.3d: %.3d(SP) := %.3d(SP) %s %.3d(SP)\n", aux->number, res->desloc, arg1->desloc, strop, arg2->desloc);
-        }
+        fprintf(out, "%.3d: %s := %s %s %s\n", aux->number, aux->inst->res, aux->inst->arg1, strop, aux->inst->arg2);
         aux = aux->next;
     }
     fclose(out);
