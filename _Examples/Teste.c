@@ -2,7 +2,9 @@ main(b){
     int a;
     int b;
     int c;
-    a = b + c + a;
+    int d;
+    a = b + c - a;
+    d = 1 + 2 - 3;
     b = 10 + 14;
-    print(c);
+    printf(c);
 }

@@ -211,10 +211,10 @@ code: declaration recursionDec {
 				if(strcmp($4->children[0]->lexeme, ";")==0){
 					struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
 		            if(!is_leaf($3)){
-                        aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, "", "");
+                        aux = create_inst_tac(mem($1->lexeme), $3->children[0]->lexeme, "", "");
 		            }
 		            else{
-		                aux = create_inst_tac($1->lexeme, $3->lexeme, "", "");
+		                aux = create_inst_tac(mem($1->lexeme), mem($3->lexeme), "", "");
 		            }
 					append_inst_tac(&lista, aux);
 				}
@@ -226,6 +226,8 @@ code: declaration recursionDec {
 					}
 					vet_t *v;
 					v=(vet_t*)malloc(n_op*sizeof(vet_t));
+					vet_t *temps;
+					temps=(vet_t*)malloc(n_op*sizeof(vet_t));
 					n_op=0;
 					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
 						v[n_op].op=malloc(sizeof(strlen(p->children[0]->lexeme)));
@@ -235,34 +237,61 @@ code: declaration recursionDec {
                             strcpy(v[n_op].var, p->children[1]->lexeme);
                         }
 						else{
-                            v[n_op].var = malloc(sizeof(strlen(p->children[1]->children[0]->lexeme)));
-                            strcpy(v[n_op].var, p->children[1]->children[0]->lexeme);
+                            v[n_op].var = malloc(sizeof(strlen(mem(p->children[1]->children[0]->lexeme))));
+                            strcpy(v[n_op].var, mem(p->children[1]->children[0]->lexeme));
                         }
                         n_op++;
 					}
-					for(i=n_op-1; i>=0; i--){
+					struct tac *aux1 = (struct tac*)malloc(sizeof(struct tac));
+					for(i=0; i<n_op; i++){
                         struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
                         if (i == 0){
                             //printf("%s %s %s %s\n", $1->lexeme, $3->lexeme, v[i].op, v[i].var);
                             if(!is_leaf($3)){
-                                aux = create_inst_tac($1->lexeme, $3->children[0]->lexeme, v[i].op, v[i].var);
+								char *t=temp();
+                                // aux = create_inst_tac(mem($1->lexeme), mem($3->children[0]->lexeme), v[i].op, v[i].var);
+								aux = create_inst_tac(t, mem($3->children[0]->lexeme), v[i].op, v[i].var);
                                 append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
                             }
                             else{
-                                aux = create_inst_tac($1->lexeme, $3->lexeme, v[i].op, v[i].var);
+								char *t=temp();
+                                aux = create_inst_tac(t, $3->lexeme, v[i].op, v[i].var);
                                 append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
                             }
                         }
                         else{
-                            //printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
-                            aux = create_inst_tac($1->lexeme, v[i-1].var, v[i].op, v[i].var);
-                            append_inst_tac(&lista, aux);
+                            // printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
+                            // aux = create_inst_tac(mem($1->lexeme), v[i-1].var, v[i].op, v[i].var);
+							if(temps[i-1].var==NULL){
+								char *t=temp();
+								aux = create_inst_tac(t, v[i-1].var, v[i].op, v[i].var);
+								append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
+							}
+							else{
+								char *t=temp();
+								aux = create_inst_tac(t, temps[i-1].var, v[i].op, v[i].var);
+								append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
+							}
                         }
+						// temps[i].var=malloc(sizeof(strlen($4->lexeme)));
+						// strcpy(temps[i].var, $4->lexeme);
+						//TODO
                     }
+					aux1 = create_inst_tac(mem($1->lexeme), temps[n_op-1].var, NULL, NULL);
+					append_inst_tac(&lista, aux1);
 					//TODO
 				}
 			}
 			}
+
 	| var assignment value recursionOP code{
 			$$ = create_node(@1.first_line, code_node, "Atribuicao", $1, $2, $3, $4, $5, NULL);
 			if(!lookup(*tabela_simbolos, $1->lexeme)){
@@ -287,6 +316,8 @@ code: declaration recursionDec {
 					}
 					vet_t *v;
 					v=(vet_t*)malloc(n_op*sizeof(vet_t));
+					vet_t *temps;
+					temps=(vet_t*)malloc(n_op*sizeof(vet_t));
 					n_op=0;
 					for(p=$4; strcmp(p->children[0]->lexeme, ";")!=0; p=p->children[2]){
 						v[n_op].op=malloc(sizeof(strlen(p->children[0]->lexeme)));
@@ -301,25 +332,51 @@ code: declaration recursionDec {
                         }
                         n_op++;
 					}
-					for(i=n_op-1; i>=0; i--){
+					struct tac *aux1 = (struct tac*)malloc(sizeof(struct tac));
+					for(i=0; i<n_op; i++){
                         struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
                         if (i == 0){
                             //printf("%s %s %s %s\n", $1->lexeme, $3->lexeme, v[i].op, v[i].var);
                             if(!is_leaf($3)){
-                                aux = create_inst_tac(mem($1->lexeme), mem($3->children[0]->lexeme), v[i].op, v[i].var);
+								char *t=temp();
+                                // aux = create_inst_tac(mem($1->lexeme), mem($3->children[0]->lexeme), v[i].op, v[i].var);
+								aux = create_inst_tac(t, mem($3->children[0]->lexeme), v[i].op, v[i].var);
                                 append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
                             }
                             else{
-                                aux = create_inst_tac(mem($1->lexeme), $3->lexeme, v[i].op, v[i].var);
+								char *t=temp();
+                                aux = create_inst_tac(t, $3->lexeme, v[i].op, v[i].var);
                                 append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
                             }
                         }
                         else{
-                            //printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
-                            aux = create_inst_tac(mem($1->lexeme), v[i-1].var, v[i].op, v[i].var);
-                            append_inst_tac(&lista, aux);
+                            // printf("%s %s %s %s\n", "RX", v[i-1].var, v[i].op, v[i].var);
+                            // aux = create_inst_tac(mem($1->lexeme), v[i-1].var, v[i].op, v[i].var);
+							if(temps[i-1].var==NULL){
+								char *t=temp();
+								aux = create_inst_tac(t, v[i-1].var, v[i].op, v[i].var);
+								append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
+							}
+							else{
+								char *t=temp();
+								aux = create_inst_tac(t, temps[i-1].var, v[i].op, v[i].var);
+								append_inst_tac(&lista, aux);
+								temps[i].var=malloc(sizeof(strlen(t)));
+								strcpy(temps[i].var, t);
+							}
                         }
+						// temps[i].var=malloc(sizeof(strlen($4->lexeme)));
+						// strcpy(temps[i].var, $4->lexeme);
+						//TODO
                     }
+					aux1 = create_inst_tac(mem($1->lexeme), temps[n_op-1].var, NULL, NULL);
+					append_inst_tac(&lista, aux1);
 					//TODO
 				}
 			}
@@ -372,9 +429,29 @@ code: declaration recursionDec {
 			}
 	| printf openParent value closeParent semi{ 
 			$$ = create_node(@1.first_line, code_node, "printf", $1, $2, $3, $4, $5, NULL);
+			struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
+				if(!is_leaf($3)){
+					// aux = create_inst_tac(mem($1->lexeme), mem($3->children[0]->lexeme), v[i].op, v[i].var);
+					aux = create_inst_tac(mem($3->children[0]->lexeme), NULL, "PRINT", NULL);
+					append_inst_tac(&lista, aux);
+				}
+				else{
+					aux = create_inst_tac($3->lexeme, NULL, "PRINT", NULL);
+					append_inst_tac(&lista, aux);
+				}
 			}
 	| printf openParent value closeParent semi code{ 
 			$$ = create_node(@1.first_line, code_node, "printf", $1, $2, $3, $4, $5, $6, NULL);
+			struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
+				if(!is_leaf($3)){
+					// aux = create_inst_tac(mem($1->lexeme), mem($3->children[0]->lexeme), v[i].op, v[i].var);
+					aux = create_inst_tac(mem($3->children[0]->lexeme), NULL, "PRINT", NULL);
+					append_inst_tac(&lista, aux);
+				}
+				else{
+					aux = create_inst_tac($3->lexeme, NULL, "PRINT", NULL);
+					append_inst_tac(&lista, aux);
+				}
 			}
 	;
 
@@ -400,7 +477,7 @@ recursionOP: semi {
 				$$ = create_node(@1.first_line, recursionOP_node, "OperacaoRecursiva", $1, NULL);
 				}
 		   | op value recursionOP {
-				$$ = create_node(@1.first_line, recursionOP_node,temp(), $1, $2, $3, NULL);
+				$$ = create_node(@1.first_line, recursionOP_node,"OperacaoRecursiva", $1, $2, $3, NULL);
 				}
 		   ;
 		   

@@ -36,7 +36,7 @@ void print_inst_tac(FILE* out, struct tac i){
 void print_tac(FILE* out, struct node_tac * code){
     struct node_tac *aux = lista;
     entry_t *aux_deslc = NULL;
-    int bytesSP = vars_size, bytesRX = 0;
+    int bytesSP = vars_size, bytesRX = temps_size;
     char op[5], strop[5];
     
     fprintf(out, "%d\n", bytesSP);
@@ -60,7 +60,13 @@ void print_tac(FILE* out, struct node_tac * code){
         else{
             strcpy(strop, "");
         }
-        fprintf(out, "%.3d: %s := %s %s %s\n", aux->number, aux->inst->res, aux->inst->arg1, strop, aux->inst->arg2);
+		if(strcmp(op, "PRINT")==0){
+			fprintf(out, "%.3d: PRINT %s\n", aux->number, aux->inst->res);
+		}
+		else if(op!=NULL)
+        	fprintf(out, "%.3d: %s := %s %s %s\n", aux->number, aux->inst->res, aux->inst->arg1, strop, aux->inst->arg2);
+		else
+			fprintf(out, "%.3d: %s := %s\n", aux->number, aux->inst->res, aux->inst->arg1);
         aux = aux->next;
     }
     fclose(out);
