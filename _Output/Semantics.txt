@@ -13,3 +13,8 @@ ENTRY: c;
 	Size: 4;
 	Desloc: 8.
 
+ENTRY: d;
+	Type: 0;
+	Size: 4;
+	Desloc: 12.
+

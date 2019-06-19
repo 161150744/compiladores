@@ -62,6 +62,12 @@
 		}
 	}
 
+	char *append(char *string1, char *string2, char *string3){
+    	char *result = malloc(sizeof(char)*128);
+		sprintf(result, "%s %s %s", string1, string2, string3);
+		return result;
+	}
+
 %}
 
 
@@ -192,9 +198,18 @@ code: declaration recursionDec {
 			}
 	| if openParent value boolean_exp value closeParent openKey code closeKey { 
 			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, NULL);
+			
+			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+			
+			char *lextemp = append($3->lexeme, $4->lexeme, $5->lexeme);
+			aux = create_inst_tac(lextemp, "INDEX1", "CONDICIONAL-If", "");
+
+			append_inst_tac(&lista, aux);
 			}
 	| if openParent value boolean_exp value closeParent openKey code closeKey code { 
 			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
+			//aux = create_inst_tac(mem($1->lexeme), $3->children[0]->lexeme, "CONDICIONAL-If", "");
+			
 			}
 	| if openParent value boolean_exp value closeParent openKey code closeKey else openKey code closeKey {
 			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NULL);

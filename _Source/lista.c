@@ -63,6 +63,9 @@ void print_tac(FILE* out, struct node_tac * code){
 		if(strcmp(op, "PRINT")==0){
 			fprintf(out, "%.3d: PRINT %s\n", aux->number, aux->inst->res);
 		}
+		else if(strcmp(op, "CONDICIONAL-If")==0){
+			fprintf(out, "%.3d: if %s GOTO %s\n", aux->number, aux->inst->res, aux->inst->arg1);
+		}
 		else if(op!=NULL)
         	fprintf(out, "%.3d: %s := %s %s %s\n", aux->number, aux->inst->res, aux->inst->arg1, strop, aux->inst->arg2);
 		else
