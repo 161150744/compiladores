@@ -21,6 +21,7 @@
 	extern struct node_tac *lista;
 	int vars_size=0;
 	int temps_size=0;
+	int lex_size=0;
 
 	entry_t* novo(char *lx, char *type){
 		entry_t* new_entry = (entry_t *) malloc(sizeof(entry_t));
@@ -66,6 +67,14 @@
     	char *result = malloc(sizeof(char)*128);
 		sprintf(result, "%s %s %s", string1, string2, string3);
 		return result;
+	}
+
+	char *rotula(){
+		lex_size++;
+		char *result = malloc(sizeof(char)*128);
+		sprintf(result, "%s%d", "Indice", lex_size);
+		return result;
+		// return append("indice",(char *)lex_size,"");
 	}
 
 %}
@@ -202,14 +211,38 @@ code: declaration recursionDec {
 			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
 			
 			char *lextemp = append($3->lexeme, $4->lexeme, $5->lexeme);
-			aux = create_inst_tac(lextemp, "INDEX1", "CONDICIONAL-If", "");
+			aux = create_inst_tac(lextemp, $9->lexeme, "CONDICIONAL-If", "");
 
 			append_inst_tac(&lista, aux);
 			}
 	| if openParent value boolean_exp value closeParent openKey code closeKey code { 
 			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NULL);
-			//aux = create_inst_tac(mem($1->lexeme), $3->children[0]->lexeme, "CONDICIONAL-If", "");
+			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-If", $1, $2, $3, $4, $5, $6, $7, $8, $9, NULL);
 			
+			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+			
+			if(!is_leaf($3)){
+				if(!is_leaf($5)){
+					char *lextemp = append(mem($3->children[0]->lexeme), $4->lexeme, mem($5->children[0]->lexeme));
+					aux = create_inst_tac(lextemp, $9->lexeme, "CONDICIONAL-If", "");
+				}
+				else{
+					char *lextemp = append(mem($3->children[0]->lexeme), $4->lexeme, $5->lexeme);
+					aux = create_inst_tac(lextemp, $9->lexeme, "CONDICIONAL-If", "");
+				}	
+			}
+			else{
+				if(!is_leaf($5)){
+					char *lextemp = append($3->lexeme, $4->lexeme, mem($5->children[0]->lexeme));
+					aux = create_inst_tac(lextemp, $9->lexeme, "CONDICIONAL-If", "");
+				}
+				else{
+					char *lextemp = append($3->lexeme, $4->lexeme, $5->lexeme);
+					aux = create_inst_tac(lextemp, $9->lexeme, "CONDICIONAL-If", "");
+				}
+			}
+
+			append_inst_tac(&lista, aux);
 			}
 	| if openParent value boolean_exp value closeParent openKey code closeKey else openKey code closeKey {
 			$$ = create_node(@1.first_line, code_node, "CONDICIONAL-IfElse", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NULL);
@@ -549,7 +582,14 @@ openKey: ABRE_CHAVE {
 	  ;
 	
 closeKey: FECHA_CHAVE {
-			$$ = create_node(@1.first_line, closeKey_node, strdup(yytext), NULL);
+			char *lex = rotula();
+			$$ = create_node(@1.first_line, closeKey_node, lex, NULL);
+
+			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+			
+			aux = create_inst_tac("", lex, "Rotulo", "");
+
+			append_inst_tac(&lista, aux);
 			}
 	   ;
 	   

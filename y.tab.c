@@ -84,6 +84,7 @@
 	extern struct node_tac *lista;
 	int vars_size=0;
 	int temps_size=0;
+	int lex_size=0;
 
 	entry_t* novo(char *lx, char *type){
 		entry_t* new_entry = (entry_t *) malloc(sizeof(entry_t));
@@ -131,8 +132,16 @@
 		return result;
 	}
 
+	char *rotula(){
+		lex_size++;
+		char *result = malloc(sizeof(char)*128);
+		sprintf(result, "%s%d", "Indice", lex_size);
+		return result;
+		// return append("indice",(char *)lex_size,"");
+	}
 
-#line 136 "y.tab.c" /* yacc.c:339  */
+
+#line 145 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -298,12 +307,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 74 "_Syntactic/syntactic.y" /* yacc.c:355  */
+#line 83 "_Syntactic/syntactic.y" /* yacc.c:355  */
 
 	char* cadeia;
 	struct _node * no;
 
-#line 307 "y.tab.c" /* yacc.c:355  */
+#line 316 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -334,7 +343,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 338 "y.tab.c" /* yacc.c:358  */
+#line 347 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -639,13 +648,13 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   180,   180,   187,   190,   193,   196,   199,   209,   214,
-     217,   220,   310,   402,   405,   408,   411,   414,   417,   420,
-     423,   426,   429,   432,   435,   439,   442,   445,   458,   473,
-     478,   483,   486,   491,   494,   499,   502,   507,   512,   519,
-     526,   531,   536,   541,   546,   551,   556,   561,   566,   572,
-     575,   578,   581,   584,   587,   593,   596,   599,   602,   605,
-     610,   613,   616,   621,   624,   627,   630,   633
+       0,   189,   189,   196,   199,   202,   205,   208,   218,   247,
+     250,   253,   343,   435,   438,   441,   444,   447,   450,   453,
+     456,   459,   462,   465,   468,   472,   475,   478,   491,   506,
+     511,   516,   519,   524,   527,   532,   535,   540,   545,   552,
+     559,   564,   569,   574,   579,   584,   596,   601,   606,   612,
+     615,   618,   621,   624,   627,   633,   636,   639,   642,   645,
+     650,   653,   656,   661,   664,   667,   670,   673
 };
 #endif
 
@@ -1612,90 +1621,114 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 180 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 189 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, code_node, "Raiz", (yyvsp[0].no), NULL);
 			cat_tac(&lista, &((yyvsp[0].no)->name));
 			syntax_tree = (yyval.no);
 		}
-#line 1622 "y.tab.c" /* yacc.c:1646  */
+#line 1631 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 187 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 196 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-1]).first_line, code_node, "Declaracao1", (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1630 "y.tab.c" /* yacc.c:1646  */
+#line 1639 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 190 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 199 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-2]).first_line, code_node, "Declaracao2", (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1638 "y.tab.c" /* yacc.c:1646  */
+#line 1647 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 193 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 202 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-3]).first_line, code_node, "DeclaracaoAtribuicao", (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1646 "y.tab.c" /* yacc.c:1646  */
+#line 1655 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 196 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 205 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-4]).first_line, code_node, "DeclaracaoAtribuicao", (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1654 "y.tab.c" /* yacc.c:1646  */
+#line 1663 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 199 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 208 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-8]).first_line, code_node, "CONDICIONAL-If", (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			
 			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
 			
 			char *lextemp = append((yyvsp[-6].no)->lexeme, (yyvsp[-5].no)->lexeme, (yyvsp[-4].no)->lexeme);
-			aux = create_inst_tac(lextemp, "INDEX1", "CONDICIONAL-If", "");
+			aux = create_inst_tac(lextemp, (yyvsp[0].no)->lexeme, "CONDICIONAL-If", "");
 
 			append_inst_tac(&lista, aux);
 			}
-#line 1669 "y.tab.c" /* yacc.c:1646  */
+#line 1678 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 209 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 218 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-9]).first_line, code_node, "CONDICIONAL-If", (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
-			//aux = create_inst_tac(mem($1->lexeme), $3->children[0]->lexeme, "CONDICIONAL-If", "");
+			(yyval.no) = create_node((yylsp[-9]).first_line, code_node, "CONDICIONAL-If", (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), NULL);
 			
+			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+			
+			if(!is_leaf((yyvsp[-7].no))){
+				if(!is_leaf((yyvsp[-5].no))){
+					char *lextemp = append(mem((yyvsp[-7].no)->children[0]->lexeme), (yyvsp[-6].no)->lexeme, mem((yyvsp[-5].no)->children[0]->lexeme));
+					aux = create_inst_tac(lextemp, (yyvsp[-1].no)->lexeme, "CONDICIONAL-If", "");
+				}
+				else{
+					char *lextemp = append(mem((yyvsp[-7].no)->children[0]->lexeme), (yyvsp[-6].no)->lexeme, (yyvsp[-5].no)->lexeme);
+					aux = create_inst_tac(lextemp, (yyvsp[-1].no)->lexeme, "CONDICIONAL-If", "");
+				}	
 			}
-#line 1679 "y.tab.c" /* yacc.c:1646  */
+			else{
+				if(!is_leaf((yyvsp[-5].no))){
+					char *lextemp = append((yyvsp[-7].no)->lexeme, (yyvsp[-6].no)->lexeme, mem((yyvsp[-5].no)->children[0]->lexeme));
+					aux = create_inst_tac(lextemp, (yyvsp[-1].no)->lexeme, "CONDICIONAL-If", "");
+				}
+				else{
+					char *lextemp = append((yyvsp[-7].no)->lexeme, (yyvsp[-6].no)->lexeme, (yyvsp[-5].no)->lexeme);
+					aux = create_inst_tac(lextemp, (yyvsp[-1].no)->lexeme, "CONDICIONAL-If", "");
+				}
+			}
+
+			append_inst_tac(&lista, aux);
+			}
+#line 1712 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 214 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 247 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-12]).first_line, code_node, "CONDICIONAL-IfElse", (yyvsp[-12].no), (yyvsp[-11].no), (yyvsp[-10].no), (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1687 "y.tab.c" /* yacc.c:1646  */
+#line 1720 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 217 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 250 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-13]).first_line, code_node, "CONDICIONAL-IfElse", (yyvsp[-13].no), (yyvsp[-12].no), (yyvsp[-11].no), (yyvsp[-10].no), (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1695 "y.tab.c" /* yacc.c:1646  */
+#line 1728 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 220 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 253 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-3]).first_line, code_node, "Atribuicao", (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			if(!lookup(*tabela_simbolos, (yyvsp[-3].no)->lexeme)){
@@ -1785,11 +1818,11 @@ yyreduce:
 				}
 			}
 			}
-#line 1789 "y.tab.c" /* yacc.c:1646  */
+#line 1822 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 310 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 343 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-4]).first_line, code_node, "Atribuicao", (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			if(!lookup(*tabela_simbolos, (yyvsp[-4].no)->lexeme)){
@@ -1879,123 +1912,123 @@ yyreduce:
 				}
 			}
 			}
-#line 1883 "y.tab.c" /* yacc.c:1646  */
+#line 1916 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 402 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 435 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-2]).first_line, code_node, "function", (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1891 "y.tab.c" /* yacc.c:1646  */
+#line 1924 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 405 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 438 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-3]).first_line, code_node, "function", (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1899 "y.tab.c" /* yacc.c:1646  */
+#line 1932 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 408 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 441 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-4]).first_line, code_node, "function", (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1907 "y.tab.c" /* yacc.c:1646  */
+#line 1940 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 411 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 444 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-5]).first_line, code_node, "function", (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1915 "y.tab.c" /* yacc.c:1646  */
+#line 1948 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 414 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 447 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-6]).first_line, code_node, "function", (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1923 "y.tab.c" /* yacc.c:1646  */
+#line 1956 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 417 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 450 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-3]).first_line, code_node, "function", (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1931 "y.tab.c" /* yacc.c:1646  */
+#line 1964 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 420 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 453 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-4]).first_line, code_node, "function", (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1939 "y.tab.c" /* yacc.c:1646  */
+#line 1972 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 423 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 456 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-5]).first_line, code_node, "function", (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1947 "y.tab.c" /* yacc.c:1646  */
+#line 1980 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 426 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 459 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-6]).first_line, code_node, "function", (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1955 "y.tab.c" /* yacc.c:1646  */
+#line 1988 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 429 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 462 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-7]).first_line, code_node, "function", (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1963 "y.tab.c" /* yacc.c:1646  */
+#line 1996 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 432 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 465 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-18]).first_line, code_node, "for", (yyvsp[-18].no), (yyvsp[-17].no), (yyvsp[-16].no), (yyvsp[-15].no), (yyvsp[-14].no), (yyvsp[-13].no), (yyvsp[-12].no), (yyvsp[-11].no), (yyvsp[-10].no), (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 	}
-#line 1971 "y.tab.c" /* yacc.c:1646  */
+#line 2004 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 435 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 468 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[-19]).first_line, code_node, "for", (yyvsp[-19].no), (yyvsp[-18].no), (yyvsp[-17].no), (yyvsp[-16].no), (yyvsp[-15].no), (yyvsp[-14].no), (yyvsp[-13].no), (yyvsp[-12].no), (yyvsp[-11].no), (yyvsp[-10].no), (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 	}
-#line 1979 "y.tab.c" /* yacc.c:1646  */
+#line 2012 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 439 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 472 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-8]).first_line, code_node, "while", (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1987 "y.tab.c" /* yacc.c:1646  */
+#line 2020 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 442 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 475 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-9]).first_line, code_node, "while", (yyvsp[-9].no), (yyvsp[-8].no), (yyvsp[-7].no), (yyvsp[-6].no), (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 1995 "y.tab.c" /* yacc.c:1646  */
+#line 2028 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 445 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 478 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-4]).first_line, code_node, "printf", (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
@@ -2009,11 +2042,11 @@ yyreduce:
 					append_inst_tac(&lista, aux);
 				}
 			}
-#line 2013 "y.tab.c" /* yacc.c:1646  */
+#line 2046 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 458 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 491 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 			(yyval.no) = create_node((yylsp[-5]).first_line, code_node, "printf", (yyvsp[-5].no), (yyvsp[-4].no), (yyvsp[-3].no), (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			struct tac *aux = (struct tac*)malloc(sizeof(struct tac));
@@ -2027,326 +2060,333 @@ yyreduce:
 					append_inst_tac(&lista, aux);
 				}
 			}
-#line 2031 "y.tab.c" /* yacc.c:1646  */
+#line 2064 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 473 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 506 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, for_node, strdup(yytext), NULL);
 }
-#line 2039 "y.tab.c" /* yacc.c:1646  */
+#line 2072 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 478 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 511 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, while_node, strdup(yytext), NULL);
 }
-#line 2047 "y.tab.c" /* yacc.c:1646  */
+#line 2080 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 483 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 516 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no)=create_node((yylsp[0]).first_line, parameter_node, "parameter", (yyvsp[0].no), NULL);
 			}
-#line 2055 "y.tab.c" /* yacc.c:1646  */
+#line 2088 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 486 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 519 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no)=create_node((yylsp[-2]).first_line, parameter_node, "parameter", (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 			}
-#line 2063 "y.tab.c" /* yacc.c:1646  */
+#line 2096 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 491 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 524 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no) = create_node((yylsp[0]).first_line, recursionOP_node, "OperacaoRecursiva", (yyvsp[0].no), NULL);
 				}
-#line 2071 "y.tab.c" /* yacc.c:1646  */
+#line 2104 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 494 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 527 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no) = create_node((yylsp[-2]).first_line, recursionOP_node,"OperacaoRecursiva", (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 				}
-#line 2079 "y.tab.c" /* yacc.c:1646  */
+#line 2112 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 499 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 532 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no) = create_node((yylsp[0]).first_line, recursionDec_node, "DeclaracaoRecursiva", (yyvsp[0].no), NULL);
 				}
-#line 2087 "y.tab.c" /* yacc.c:1646  */
+#line 2120 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 502 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 535 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 				(yyval.no) = create_node((yylsp[-2]).first_line, recursionDec_node, "DeclaracaoRecursiva", (yyvsp[-2].no), (yyvsp[-1].no), (yyvsp[0].no), NULL);
 				}
-#line 2095 "y.tab.c" /* yacc.c:1646  */
+#line 2128 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 507 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 540 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     { 
 				(yyval.no) = create_node((yylsp[0]).first_line, assignment_node, strdup(yytext), NULL); 
 				}
-#line 2103 "y.tab.c" /* yacc.c:1646  */
+#line 2136 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 512 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 545 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {  
 
 			(yyval.no) = create_node((yylsp[0]).first_line, var_node, strdup(yytext), NULL);
 			}
-#line 2112 "y.tab.c" /* yacc.c:1646  */
+#line 2145 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 519 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 552 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {  
 
 			(yyval.no) = create_node((yylsp[0]).first_line, printf_node, strdup(yytext), NULL);
 			}
-#line 2121 "y.tab.c" /* yacc.c:1646  */
+#line 2154 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 526 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 559 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 		(yyval.no) = create_node((yylsp[0]).first_line, semi_node, strdup(yytext), NULL);
 		}
-#line 2129 "y.tab.c" /* yacc.c:1646  */
+#line 2162 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 531 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 564 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 		(yyval.no) = create_node((yylsp[0]).first_line, comma_node, strdup(yytext), NULL);
 		}
-#line 2137 "y.tab.c" /* yacc.c:1646  */
+#line 2170 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 536 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 569 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 		(yyval.no) = create_node((yylsp[0]).first_line, if_node, strdup(yytext), NULL);
 		}
-#line 2145 "y.tab.c" /* yacc.c:1646  */
+#line 2178 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 541 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 574 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 		(yyval.no) = create_node((yylsp[0]).first_line, else_node, strdup(yytext), NULL);
 		}
-#line 2153 "y.tab.c" /* yacc.c:1646  */
+#line 2186 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 546 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 579 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, openKey_node, strdup(yytext), NULL);
 			}
-#line 2161 "y.tab.c" /* yacc.c:1646  */
+#line 2194 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 551 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 584 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, closeKey_node, strdup(yytext), NULL);
+			char *lex = rotula();
+			(yyval.no) = create_node((yylsp[0]).first_line, closeKey_node, lex, NULL);
+
+			struct tac *aux=(struct tac*)malloc(sizeof(struct tac));
+			
+			aux = create_inst_tac("", lex, "Rotulo", "");
+
+			append_inst_tac(&lista, aux);
 			}
-#line 2169 "y.tab.c" /* yacc.c:1646  */
+#line 2209 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 556 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 596 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, openparent_node, strdup(yytext), NULL);
 			}
-#line 2177 "y.tab.c" /* yacc.c:1646  */
+#line 2217 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 561 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 601 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 			(yyval.no) = create_node((yylsp[0]).first_line, closeparent_node, strdup(yytext), NULL);
 			}
-#line 2185 "y.tab.c" /* yacc.c:1646  */
+#line 2225 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 566 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+#line 606 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 					(yyval.no) = create_node((yylsp[-1]).first_line, declaration_node, "NT-Declaracao", (yyvsp[-1].no), (yyvsp[0].no), NULL);
 					verifica((yyvsp[0].no)->lexeme, (yyvsp[-1].no)->lexeme);
 					}
-#line 2194 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 49:
-#line 572 "_Syntactic/syntactic.y" /* yacc.c:1646  */
-    {
-					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
-					}
-#line 2202 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 50:
-#line 575 "_Syntactic/syntactic.y" /* yacc.c:1646  */
-    {
-					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
-					}
-#line 2210 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 51:
-#line 578 "_Syntactic/syntactic.y" /* yacc.c:1646  */
-    {
-					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
-					}
-#line 2218 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 52:
-#line 581 "_Syntactic/syntactic.y" /* yacc.c:1646  */
-    {
-					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
-					}
-#line 2226 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 53:
-#line 584 "_Syntactic/syntactic.y" /* yacc.c:1646  */
-    {
-					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
-					}
 #line 2234 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 54:
-#line 587 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 49:
+#line 612 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
 					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
 					}
 #line 2242 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 55:
-#line 593 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 50:
+#line 615 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-		(yyval.no) = create_node((yylsp[0]).first_line, plus_node, strdup(yytext), NULL);
-		}
+					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
+					}
 #line 2250 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 56:
-#line 596 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 51:
+#line 618 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-		(yyval.no) = create_node((yylsp[0]).first_line, minus_node, strdup(yytext), NULL);
-		}
+					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
+					}
 #line 2258 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 57:
-#line 599 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 52:
+#line 621 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-		(yyval.no) = create_node((yylsp[0]).first_line, times_node, strdup(yytext), NULL);
-		}
+					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
+					}
 #line 2266 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 58:
-#line 602 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 53:
+#line 624 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-		(yyval.no) = create_node((yylsp[0]).first_line, divide_node, strdup(yytext), NULL);
-		}
+					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
+					}
 #line 2274 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 59:
-#line 605 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 54:
+#line 627 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-		(yyval.no) = create_node((yylsp[0]).first_line, rest_node, strdup(yytext), NULL);
-		}
+					(yyval.no) = create_node((yylsp[0]).first_line, boolean_exp_node, strdup(yytext), NULL);
+					}
 #line 2282 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 60:
-#line 610 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 55:
+#line 633 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, value_node, "Declaracao", (yyvsp[0].no), NULL);
-			}
+		(yyval.no) = create_node((yylsp[0]).first_line, plus_node, strdup(yytext), NULL);
+		}
 #line 2290 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 61:
-#line 613 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 56:
+#line 636 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, value_node, strdup(yytext), NULL);
-			}
+		(yyval.no) = create_node((yylsp[0]).first_line, minus_node, strdup(yytext), NULL);
+		}
 #line 2298 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 62:
-#line 616 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 57:
+#line 639 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, value_node, strdup(yytext), NULL);
-			}
+		(yyval.no) = create_node((yylsp[0]).first_line, times_node, strdup(yytext), NULL);
+		}
 #line 2306 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 63:
-#line 621 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 58:
+#line 642 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, float_node, strdup(yytext), NULL);
-			}
+		(yyval.no) = create_node((yylsp[0]).first_line, divide_node, strdup(yytext), NULL);
+		}
 #line 2314 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 64:
-#line 624 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 59:
+#line 645 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, int_node, strdup(yytext), NULL);
-			}
+		(yyval.no) = create_node((yylsp[0]).first_line, rest_node, strdup(yytext), NULL);
+		}
 #line 2322 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 65:
-#line 627 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 60:
+#line 650 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, char_node, strdup(yytext), NULL);
+			(yyval.no) = create_node((yylsp[0]).first_line, value_node, "Declaracao", (yyvsp[0].no), NULL);
 			}
 #line 2330 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 66:
-#line 630 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 61:
+#line 653 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, double_node, strdup(yytext), NULL);
+			(yyval.no) = create_node((yylsp[0]).first_line, value_node, strdup(yytext), NULL);
 			}
 #line 2338 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 67:
-#line 633 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+  case 62:
+#line 656 "_Syntactic/syntactic.y" /* yacc.c:1646  */
     {
-			(yyval.no) = create_node((yylsp[0]).first_line, bool_node, strdup(yytext), NULL);
+			(yyval.no) = create_node((yylsp[0]).first_line, value_node, strdup(yytext), NULL);
 			}
 #line 2346 "y.tab.c" /* yacc.c:1646  */
     break;
 
+  case 63:
+#line 661 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+    {
+			(yyval.no) = create_node((yylsp[0]).first_line, float_node, strdup(yytext), NULL);
+			}
+#line 2354 "y.tab.c" /* yacc.c:1646  */
+    break;
 
-#line 2350 "y.tab.c" /* yacc.c:1646  */
+  case 64:
+#line 664 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+    {
+			(yyval.no) = create_node((yylsp[0]).first_line, int_node, strdup(yytext), NULL);
+			}
+#line 2362 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 65:
+#line 667 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+    {
+			(yyval.no) = create_node((yylsp[0]).first_line, char_node, strdup(yytext), NULL);
+			}
+#line 2370 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 66:
+#line 670 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+    {
+			(yyval.no) = create_node((yylsp[0]).first_line, double_node, strdup(yytext), NULL);
+			}
+#line 2378 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 67:
+#line 673 "_Syntactic/syntactic.y" /* yacc.c:1646  */
+    {
+			(yyval.no) = create_node((yylsp[0]).first_line, bool_node, strdup(yytext), NULL);
+			}
+#line 2386 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+
+#line 2390 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2581,7 +2621,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 640 "_Syntactic/syntactic.y" /* yacc.c:1906  */
+#line 680 "_Syntactic/syntactic.y" /* yacc.c:1906  */
 
  /* A partir daqui, insere-se qlqer codigo C necessario.
   */
