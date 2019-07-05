@@ -81,26 +81,37 @@ void print_tac(FILE* out, struct node_tac * code){
 
 
 void append_inst_tac(struct node_tac ** code, struct tac * inst){
-	struct node_tac * newInst=(struct node_tac *) malloc(sizeof(struct node_tac));
-	if(newInst==NULL){
-		printf("Allocation Error\n");
-		exit(0);
-	}
-	newInst->inst=inst;
-	newInst->next=NULL;
-	newInst->number=numList;
-	numList++;
-	if(*code==NULL){
-		*code=newInst;
-		newInst->prev=NULL;
-	}
-	else{
-		struct node_tac * aux;
-		aux=*code;
-		for(aux=*code; aux->next!=NULL; aux=aux->next);
-		aux->next=newInst;
-		newInst->prev=aux;
-	}
+	    struct node_tac *novo_no = (struct node_tac*)malloc(sizeof(struct node_tac));
+    struct node_tac *atual = *code;
+    struct node_tac *p = NULL;
+    int i = 0;
+    
+    novo_no->inst = (struct tac*)malloc(sizeof(struct tac));
+    novo_no->inst = inst;
+    novo_no->number = 0;
+    
+    if(atual == NULL){
+        novo_no->prev = NULL;
+        novo_no->next = NULL;
+        *code = novo_no;
+        return;
+    }
+    else{
+       
+        novo_no->next = *code;
+        atual->prev = novo_no;
+        novo_no->prev = NULL;
+        *code = novo_no;
+    }  
+    
+    p = *code;
+    while (p != NULL){
+        p->number = i;
+        i++;
+        p = p->next;
+    }
+    
+    return;
 }
 
 

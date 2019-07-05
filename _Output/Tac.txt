@@ -1,20 +1,20 @@
 16
 28
-001: 000(RX) := 1 SUM 2
-002: 008(SP) := 000(RX)  
-003: Indice1
-004: 004(RX) := 1 SUM 2
-005: 008(SP) := 004(RX)  
-006: Indice2
-007: if 3 < 6 GOTO Indice2
-008: if 5 < 6 GOTO Indice1
+000: Indice3
+001: 000(SP) := 024(RX)  
+002: 024(RX) := 020(RX) SUB 000(SP)
+003: 020(RX) := 004(SP) SUM 008(SP)
+004: 012(SP) := 016(RX)  
+005: 016(RX) := 012(RX) SUB 3
+006: 012(RX) := 1 SUM 2
+007: 004(SP) := 008(RX)  
+008: 008(RX) := 10 SUM 14
 009: PRINT 008(SP)
-010: 008(RX) := 10 SUM 14
-011: 004(SP) := 008(RX)  
-012: 012(RX) := 1 SUM 2
-013: 016(RX) := 012(RX) SUB 3
-014: 012(SP) := 016(RX)  
-015: 020(RX) := 004(SP) SUM 008(SP)
-016: 024(RX) := 020(RX) SUB 000(SP)
-017: 000(SP) := 024(RX)  
-018: Indice3
+010: if 5 < 6 GOTO Indice1
+011: if 3 < 6 GOTO Indice2
+012: Indice2
+013: 008(SP) := 004(RX)  
+014: 004(RX) := 1 SUM 2
+015: Indice1
+016: 008(SP) := 000(RX)  
+017: 000(RX) := 1 SUM 2
